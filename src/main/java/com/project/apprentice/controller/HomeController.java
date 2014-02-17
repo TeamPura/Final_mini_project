@@ -32,7 +32,7 @@ public class HomeController {
 	@Resource
 	private AdminUserRepository adminUserImplementation;
 
-	private Faculty faculty;
+	public Faculty faculty;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	

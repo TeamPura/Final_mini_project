@@ -1,6 +1,7 @@
 package com.project.apprentice.repos;
 
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -9,6 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.project.apprentice.model.Class;
+import com.project.apprentice.model.Faculty;
+import com.project.apprentice.model.SchoolYear;
 
 public interface ClassRepository extends JpaRepository <Class, Integer>  {
 	
@@ -31,5 +34,10 @@ public interface ClassRepository extends JpaRepository <Class, Integer>  {
 			"AND c.faculty.userId = faculty.userId " +
 			"AND c.classId = :classId")
 	public List<Class> findByClassInfo(@Param("classId") int classId);
+	
+	public List<Class> findByFaculty(Faculty faculty);	
+	public List<Class> findByFacultyAndSchoolYear(Faculty faculty, SchoolYear schoolYear);
+	public List<Class> findByDueEnrollmentDateOrDueEnrollmentDateBeforeAndFaculty(Date dueDate,Date dueDate2, Faculty faculty);
+	
 		
 }
