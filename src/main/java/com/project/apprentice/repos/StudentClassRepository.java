@@ -24,7 +24,7 @@ public interface StudentClassRepository extends JpaRepository <StudentClass, Int
 	
 	//faculty
 	public List<StudentClass> findByClazz(Class classs);
-	public List<StudentClass> findByClazzClassId(long classId);
+	public List<StudentClass> findByClazzClassId(int classId);
 	
 	
 	
