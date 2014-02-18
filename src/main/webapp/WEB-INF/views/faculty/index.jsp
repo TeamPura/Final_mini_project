@@ -371,17 +371,19 @@
                 <input type="hidden" name="day.dayId" value="${classDue[index].day.dayId}" />
                 <input type="hidden" name="room.roomId" value="${classDue[index].room.roomId}" />
                 <input type="hidden" name="schedule.scheduleId" value="${classDue[index].schedule.scheduleId}" />
+                <input type="hidden" name="schoolYear.schoolYearId" value="${classDue[index].schoolYear.schoolYearId}" />
+                <input type="hidden" name="faculty.userId" value="${classDue[index].faculty.userId}" />
                 
 <tr> 
                 <td> ${classDue[index].subject.subjName}</td> 
                 <td> 
-                  <input id="datepicker2" name="dueEnrollmentDate" value="${classDue[index].dueEnrollmentDate}" class="form-control" style="width: 110px;"> 
+                  <input type="date" id="datepicker2" name="dueEnrollmentDate" value="${classDue[index].dueEnrollmentDate}" class="form-control" style="width: 110px;"> 
                   </td> 
                 <td> ${Enrolled[index]}</td> 
                 <td> ${classDue[index].maxStudents}</td> 
                                 <td> ${classDue[index].minStudents}</td> 
             
-                  <td> <input id="datepicker3" name="startClassDate" value="${classDue[index].startClassDate}" class="form-control" style="width: 110px;"> </td> 
+                  <td> <input type="date" id="datepicker3" name="startClassDate" value="${classDue[index].startClassDate}" class="form-control" style="width: 110px;"> </td> 
  
                                 <td>
                                 <select id="endTime" name="status" class="input-medium" > 
