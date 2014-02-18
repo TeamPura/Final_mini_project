@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -48,9 +49,7 @@ public class FacultyController {
 	
 	
 	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	List<Class> classDuePost = new ArrayList<Class>();
-	
+
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -107,11 +106,8 @@ public class FacultyController {
 		/* For edit class*/		
 
 		List<Integer> Enrolled = new ArrayList<Integer>();
-		List<Class> classDue = new ArrayList<Class>();
-		classDue = facultyService.getClassDue(date, date, homeController.faculty,"New");
-		
-		classDuePost = classDue;
-				
+		List<Class> classDue = facultyService.getClassDue(date, date, homeController.faculty,"New");
+		 
 		for(int i=0; i<classDue.size();i++){
 					
 			List<StudentClass> studentsEnrolled = facultyService.studentsEnrolled(classDue.get(i));
@@ -130,6 +126,19 @@ public class FacultyController {
 		return "faculty/index";
 	}
 	
+	
+	
+	 @InitBinder("classs") 
+		protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) 
+		{   	
+			SimpleDateFormat dateFormat = new SimpleDateFormat();
+			dateFormat.setLenient(false);       
+			
+			dateFormat.applyPattern("yyyy-MM-dd");  
+			
+			binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+			binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
+		}
 	
 	
 	
@@ -165,16 +174,19 @@ public class FacultyController {
       }
 	  
 	  
-	  @InitBinder
-	  protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
-		  	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			formatter.setLenient(false);
-		  	binder.registerCustomEditor(Date.class, new CustomDateEditor(formatter, false));
-		  	}
-	  
+	  @InitBinder("updateClass")
+	  protected void initBinder2(HttpServletRequest request, ServletRequestDataBinder binder) {
+		  SimpleDateFormat dateFormat = new SimpleDateFormat();
+			dateFormat.setLenient(false);       
+			
+			dateFormat.applyPattern("yyyy-MM-dd");  
+			
+			binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+			binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
+	  } 
 	  
 		@RequestMapping(value = "/updateClassStudents", method = RequestMethod.POST)
-		public String viewClassStudentsPost(@ModelAttribute Class updateClass) throws ParseException {
+		public String viewClassStudentsPost(@ModelAttribute Class updateClass){
 			
 			facultyService.updateUser(updateClass, (int)updateClass.getClassId());
 							

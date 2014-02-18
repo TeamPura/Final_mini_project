@@ -455,15 +455,15 @@
 
             <form class="form-horizontal" method="post" action="updateClassStudents"> 
       
-                <input type="hidden" name="classId" value="${classList[index].classId}" />
-                <input type="hidden" name="subject.subjId" value="${classDue[index].subject.subjId}" />
-                <input type="hidden" name="maxStudents" value="${classDue[index].maxStudents}" />
-                <input type="hidden" name="minStudents" value="${classDue[index].minStudents}" />
-                <input type="hidden" name="day.dayId" value="${classDue[index].day.dayId}" />
-                <input type="hidden" name="room.roomId" value="${classDue[index].room.roomId}" />
-                <input type="hidden" name="schedule.scheduleId" value="${classDue[index].schedule.scheduleId}" />
-                <input type="hidden" name="schoolYear.schoolYearId" value="${classDue[index].schoolYear.schoolYearId}" />
-                <input type="hidden" name="faculty.userId" value="${classDue[index].faculty.userId}" />
+				                <input type="hidden" name="classId" value="${classDue[index].classId}" />
+				                <input type="hidden" name="subject.subjId" value="${classDue[index].subject.subjId}" />
+				                <input type="hidden" name="maxStudents" value="${classDue[index].maxStudents}" />
+				                <input type="hidden" name="minStudents" value="${classDue[index].minStudents}" />
+				                <input type="hidden" name="day.dayId" value="${classDue[index].day.dayId}" />
+				                <input type="hidden" name="room.roomId" value="${classDue[index].room.roomId}" />
+				                <input type="hidden" name="schedule.scheduleId" value="${classDue[index].schedule.scheduleId}" />
+				                <input type="hidden" name="schoolYear.schoolYearId" value="${classDue[index].schoolYear.schoolYearId}" />
+				                <input type="hidden" name="faculty.userId" value="${classDue[index].faculty.userId}" />
                 
 <tr> 
                 				<td> ${classDue[index].classId}</td> 
@@ -479,9 +479,10 @@
  
                                 <td>
                                 <select id="endTime" name="status" class="input-medium" > 
-                    <option value = "${classDue[index].status}"> ${classDue[index].status} </option>
-                                <option value = "Cancel"> Cancel </option>
-                                <option value = "On going"> Start </option>
+                    			<option value = "${classDue[index].status}"> ${classDue[index].status} </option>
+                                <option value = "Cancelled"> Cancel </option>
+                                <option value = "Started"> Start </option>
+                            
                                 </select>
                                 </td> 
                                  
