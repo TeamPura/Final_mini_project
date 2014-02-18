@@ -139,7 +139,7 @@
        	<c:forEach begin="0" end="${fn:length(classList) - 1}" var="index">					
                         <tr>                		
                         		<td> <a href="viewStudentsClassPost/${classList[index].classId}" target="_blank">  
-                        		${classList[index].subject.subjName}</td> 
+                        		${classList[index].subject.subjName}</a></td> 
 								<td> ${classList[index].dueEnrollmentDate}</td>								
 								<td> ${allEnrolled[index]}</td>																				
 								<td> ${classList[index].maxStudents}</td> 
@@ -313,7 +313,7 @@
                <h4>Last Name:  <a>${faculty.fname}</a> </h4>
                <h4>Gender:  <a>${faculty.gender}</a> </h4>
                <h4>Email Address:  <a>${faculty.emailAddress}</a> </h4>
-               <h4>Status:  <a>${faculty.status}</a> </h4>
+               <!-- <h4>Status:  <a>${faculty.status}</a> </h4>  -->
                <h4>Department:  <a>${faculty.department.deptName}</a> </h4>
          	</div>
          	<div class="modal-footer">
