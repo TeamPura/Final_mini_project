@@ -321,15 +321,90 @@
                     <h2>View Classes</h2>
                 	</div><!--/.center-->
             </div>
-            <div class="modal-body">   
-               <h4>ID Number:  <a>${faculty.userId}</a></h4>
-               <h4>First Name:  <a>${faculty.fname}</a> </h4>
-               <h4>Middle Name:  <a>${faculty.fname}</a> </h4>
-               <h4>Last Name:  <a>${faculty.fname}</a> </h4>
-               <h4>Gender:  <a>${faculty.gender}</a> </h4>
-               <h4>Email Address:  <a>${faculty.emailAddress}</a> </h4>
-               <!-- <h4>Status:  <a>${faculty.status}</a> </h4>  -->
-               <h4>Department:  <a>${faculty.department.deptName}</a> </h4>
+            <div class="modal-body" style="padding-left: 247px;">
+            <table style="border-spacing: 25px;border-collapse: separate;">
+            <tr>
+               	<td>
+               		<div class="control-group">
+  						<label class="control-label" for="minstud" style="font-size: 14px;">
+  						ID Number:
+  						</label>  
+  						<div class="controls">
+  						<a style="font-size: 16px;">${faculty.userId}</a>
+  						</div>
+  					</div>  					
+               	</td>
+            </tr>
+            <tr>
+               	<td colspan="3">
+               		<div class="control-group">
+  						<label class="control-label" for="minstud" style="font-size: 14px;">
+               			Name: 
+               			</label>
+               			<div class="controls">
+               			<a style="font-size: 16px;">${faculty.lname}, ${faculty.fname} ${faculty.mname}</a>
+               			</div>
+               		</div> 
+               	</td>
+               	<!-- <td>
+               		<div class="control-group">
+  						<label class="control-label" for="minstud" style="font-size: 14px;">
+               			Middle Name:  
+               			</label>
+               			<div class="controls">
+               			<a style="font-size: 16px;">${faculty.mname}</a>
+               			</div>
+               		</div>
+               	</td>
+               	<td>
+               		<div class="control-group">
+  						<label class="control-label" for="minstud" style="font-size: 14px;">
+               			Last Name:  
+               			</label>
+               			<div class="controls">
+               			<a style="font-size: 16px;">${faculty.lname}</a>
+               			</div>
+               		</div>
+               	</td>
+            </tr> 
+            <tr>-->
+               	<td>
+               		<div class="control-group">
+  						<label class="control-label" for="minstud" style="font-size: 14px;">
+               			Email Address:
+               			</label>
+               			<div class="controls">
+               			<a style="font-size: 16px;">${faculty.emailAddress}</a>
+               			</div>
+               		</div>
+               	</td>
+               	<td>
+               		<div class="control-group">
+  						<label class="control-label" for="minstud" style="font-size: 14px;">
+               			Gender:
+               			</label>
+               			<div class="controls">
+               			<c:if test="${faculty.gender == 'F' }">
+               			<a style="font-size: 16px;">Female</a>
+               			</c:if>
+               			<c:if test="${faculty.gender == 'M' }">
+               			<a style="font-size: 16px;">Male</a>
+               			</c:if>
+               			</div>
+               		</div>
+               	</td>               	
+               	<td>
+               		<div class="control-group">
+  						<label class="control-label" for="minstud" style="font-size: 14px;">
+               			Department:
+               			</label>
+               			<div class="controls">
+               			<a style="font-size: 16px;">${faculty.department.deptName}</a>
+               			</div>
+               		</div>
+               	</td>
+            </tr>
+            </table>   
          	</div>
          	<div class="modal-footer">
         					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>        					
