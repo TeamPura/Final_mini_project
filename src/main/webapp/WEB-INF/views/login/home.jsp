@@ -14,11 +14,33 @@
         <link rel="stylesheet" href="resources/login/css/reset.css">
         <link rel="stylesheet" href="resources/login/css/supersized.css">
         <link rel="stylesheet" href="resources/login/css/style.css">
+        
+        
+        <!-- Javascript -->
+        <script src="resources/login/js/jquery-1.8.2.min.js"></script>
+        <script src="resources/login/js/supersized.3.2.7.min.js"></script>
+        <script src="resources/login/js/supersized-init.js"></script>
+        <script src="resources/login/js/scripts.js"></script>
+        
+        <!-- Validation Engine -->
+	    <link href="resources/faculty/css/validationEngine.jquery.css" rel="stylesheet">
+	    <script src="resources/faculty/js/jquery.validationEngine-en.js"></script>
+	    <script src="resources/faculty/js/jquery.validationEngine.js"></script>  
 
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+	
+	 <script>    
+    $(document).ready(function () {
+    	jQuery(document).ready(function(){
+			// binds form submission and fields to the validation engine
+			jQuery("#formID").validationEngine();
+		});
+    });
+  	</script>
+
 
     </head>
 
@@ -26,18 +48,17 @@
 
         <div class="page-container">
             <h1>Login</h1>
-            <form action="loginHomePost" method="post">
-                <input type="text" name="userId" class="username" placeholder="User ID">
-                <input type="password" name="password" class="password" placeholder="Password">
-                <button type="submit">Sign me in</button>                
+            <form id="formID" action="loginHomePost" method="post">
+                <input type="text" name="userId" class="username" placeholder="User ID" data-validation-engine="validate[required,custom[integer]]">
+                <input type="password" name="password" class="password" placeholder="Password" data-validation-engine="validate[required]">
+                <button type="submit">Sign me in</button>  
+                
+                <h4> ${prompt} </h4>
+                              
             </form>
         </div>
 
-        <!-- Javascript -->
-        <script src="resources/login/js/jquery-1.8.2.min.js"></script>
-        <script src="resources/login/js/supersized.3.2.7.min.js"></script>
-        <script src="resources/login/js/supersized-init.js"></script>
-        <script src="resources/login/js/scripts.js"></script>
+    
 
     </body>
 

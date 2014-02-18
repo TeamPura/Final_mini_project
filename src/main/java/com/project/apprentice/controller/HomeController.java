@@ -60,7 +60,7 @@ public class HomeController {
 		loginStudent = loginUserService.LoginStudent(studentId, studentPassword);
 		
 		if(loginAdmin != null ){                        
-			return "redirect:/";
+			return "redirect:/adminhome";
 		}else if(loginFaculty != null){
 			//faculty = loginFaculty;
 			request.getSession().setAttribute("loginFaculty", loginFaculty);
@@ -70,7 +70,8 @@ public class HomeController {
 			request.getSession().setAttribute("student_id", studentId);
 			return "redirect:/studentDashboard";
 		}else{
-			logger.info("Not a registered user!");
+			String promt = "The user name / password is incorrect.";
+			model.addAttribute("prompt", promt );
 			return "redirect:/";
 		}
 

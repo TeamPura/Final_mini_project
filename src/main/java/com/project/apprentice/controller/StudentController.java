@@ -241,7 +241,7 @@ public class StudentController {
 		String dateStr = dateFormat.format(date);
 		Date dateEnroll = dateFormat.parse(dateStr); 
 		
-		for(int i=1; i<enrollInfo.getClazz().size(); i++){
+		for(int i=0; i<enrollInfo.getClazz().size(); i++){
 			clazz = studentService.getClassData(enrollInfo.getClazz().get(i).getClassId());
 			sc.setClazz(clazz);			
 			sc.setStudent(student);
