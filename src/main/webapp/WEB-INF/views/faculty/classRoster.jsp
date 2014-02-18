@@ -29,6 +29,9 @@
 </head>
 <body>
 
+<div class="modal-dialog modal-lg">
+   	<div class="modal-content">
+   		<div class="modal-body">
 			<table  class="table table-striped table-bordered" id="example">
 			<thead>
 						<tr>	
@@ -66,7 +69,9 @@
              	</c:otherwise>                  
                 </c:choose>                 
          	</tbody> 
-         	</table> 
-
+         	</table>
+        </div> 
+	</div>
+</div>
 </body>
 </html>

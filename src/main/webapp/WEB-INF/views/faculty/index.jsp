@@ -183,12 +183,12 @@
                                   
                 		<form class="form-horizontal" method="post" action="addClassPost">
 						<!-- Form Name <legend>Add Class</legend> -->
-						
-						<!-- Subject Drop Down -->   
-						<div class="control-group">
+				<table style="border-spacing: 10px;border-collapse: separate;">		
+					<tr>	<!-- Subject Drop Down -->   
+						<td colspan="3"><div class="control-group">
  				 			<label class="control-label" for="asd">Subject</label>
  				 			<div class="controls">
-    							<select id="endTime" name="subject.subjId"  class="form-control" style="width: 350px;" required>
+    							<select id="endTime" name="subject.subjId"  class="form-control" style="width: 450px;" required>
     							<option> </option>
       						<c:forEach var="listValue" items="${subjectList}">
                    				<option value="${listValue.subjId}">${listValue.subjName} - ${listValue.subjDesc} - ${listValue.units}.0 units</option>
@@ -196,9 +196,10 @@
    								 </select>
   							</div>
 						</div> 
+						</td>
 						 
 						<!-- Days Drop Down-->
-						<div class="control-group">
+						<td><div class="control-group">
   						<label class="control-label" for="selectbasic">Days</label>
   							<div class="controls">
     							<select id="selectbasic" name="day.dayId"  class="form-control" style="width: 120px;" required>
@@ -207,11 +208,14 @@
                    				<option value="${listValue.dayId}">${listValue.dayName}</option>
 	   						</c:forEach>
  								</select>
+ 								
   							</div>
-						</div>
-
+  						</div>
+						</td>
+					
+				
 						<!-- Start time and End Time Drop Down -->
-						<div class="control-group">
+						<td><div class="control-group">
  						<label class="control-label" for="asd">Time Schedule</label>
   							<div class="controls">
     							<select id="startTime" name="schedule.scheduleId"  class="form-control" style="width: 135px;" required>
@@ -222,9 +226,10 @@
     							</select>
   							</div>
 						</div>
-
+						</td>
+					
 						<!-- Room Drop Down-->    
-						<div class="control-group">
+						<td><div class="control-group">
   						<label class="control-label" for="asd">Room and Capacity</label>
   							<div class="controls">
     							<select id="endTime" name="room.roomId" class="form-control" style="width: 195px;" required>
@@ -235,9 +240,11 @@
     							</select>
   							</div>
 						</div>
-
+						</td>
+					</tr>
+					<tr>
 						<!-- School Year Drop Down -->
-						<div class="control-group">
+						<td><div class="control-group">
   						<label class="control-label" for="asd">School Year</label>
   							<div class="controls">
     							<select id="startTime" name="schoolYear.schoolYearId" class="form-control" style="width: 120px;" required>
@@ -248,38 +255,46 @@
     							</select>
  							 </div>
 						</div>
+						</td>
+					
 
 						<!-- Start Date DatePicker Input-->
-						<div class="control-group">
+						<td><div class="control-group">
   						<label class="control-label" for="Startdate">Start Date:</label>
   							<div class="controls">
    					 			<input id="datepicker" name="startClassDate" placeholder="dd-mm-yyyy"  class="form-control" style="width: 110px;" required type="text">
     						</div>
 						</div>
+						</td>
 
 						<!-- Due Date DatePicker Input-->
-						<div class="control-group">
+						<td><div class="control-group">
   						<label class="control-label" for="textinput">Due Date</label>
    							<div class="controls">
     							<input id="datepicker1" name="dueEnrollmentDate" placeholder="dd-mm-yyyy" class="form-control" style="width: 110px;"  required type="text">
   							</div>
 						</div>
+						</td>
 
 						<!-- Minimum Students Text input-->
-						<div class="control-group">
+						<td><div class="control-group">
   						<label class="control-label" for="minstud">Minimum Students:</label>
   							<div class="controls">
    								<input id="minstud" name="minStudents" placeholder="" class="form-control" style="width: 50px;" required type="text">
 							</div>
 						</div>
+						</td>
 
 						<!-- Maximum Students Text input-->
-						<div class="control-group">
+						<td><div class="control-group">
   						<label class="control-label" for="textinput">Maximun Students:</label>
   							<div class="controls">
     							<input id="textinput" name="maxStudents" placeholder="" class="form-control" style="width: 50px;" required type="text">
   							</div>
 						</div>
+						</td>
+					</tr>
+				</table>
 					</div>
 					<!-- Button (Double) -->
 						<div class="modal-footer">
