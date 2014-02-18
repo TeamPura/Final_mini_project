@@ -38,11 +38,11 @@ public class Prospectus implements Serializable {
 	private Course course;
 
 	//bi-directional many-to-one association to Student
-	@OneToMany(mappedBy="propectus")
+	@OneToMany(mappedBy="prospectus")
 	private List<Student> students;
 
 	//bi-directional many-to-one association to Subject
-	@OneToMany(mappedBy="propectus")
+	@OneToMany(mappedBy="prospectus")
 	private List<Subject> subjects;
 
 	public Prospectus() {

@@ -13,11 +13,11 @@ import com.project.apprentice.model.StudentClass;
 
 public interface StudentClassRepository extends JpaRepository <StudentClass, Integer>  {
 	
-	@Query("SELECT c.classId as enrolClassId, count(sc.student.userId) as enrolClassCount " +
-			"FROM Class c, StudentClass sc " +
-			"WHERE c.classId = sc.clazz.classId " +
-			"AND c.subject.subjId = :subjId " +
-			"GROUP BY sc.clazz.classId")
+	@Query("SELECT c.classId, (SELECT COUNT(sc.clazz.classId) " +
+							"FROM StudentClass sc " +
+							"WHERE c.classId = sc.clazz.classId) AS cntEnrollees " +
+			"FROM Class c " +
+			"WHERE c.subject.subjId = :subjId")
 	public List<Object[]> findByClassEnrollees(@Param("subjId") int subjId);
 	
 	public List<StudentClass> findByStudent_UserId(int student_id);

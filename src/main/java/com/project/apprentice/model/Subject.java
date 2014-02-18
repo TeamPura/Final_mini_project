@@ -36,10 +36,10 @@ public class Subject implements Serializable {
 	@JoinColumn(name="fee_id")
 	private Fee fee;
 
-	//bi-directional many-to-one association to Propectus
+	//bi-directional many-to-one association to Prospectus
 	@ManyToOne
 	@JoinColumn(name="prospectus_id")
-	private Prospectus propectus;
+	private Prospectus prospectus;
 
 	//bi-directional many-to-one association to Semester
 	@ManyToOne
@@ -97,12 +97,12 @@ public class Subject implements Serializable {
 		this.fee = fee;
 	}
 
-	public Prospectus getPropectus() {
-		return this.propectus;
+	public Prospectus getProspectus() {
+		return this.prospectus;
 	}
 
-	public void setPropectus(Prospectus propectus) {
-		this.propectus = propectus;
+	public void setProspectus(Prospectus prospectus) {
+		this.prospectus = prospectus;
 	}
 
 	public Semester getSemester() {

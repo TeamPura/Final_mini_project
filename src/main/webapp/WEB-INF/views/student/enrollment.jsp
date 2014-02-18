@@ -458,8 +458,9 @@
        <div id="enrol_class_sched"></div> 
         
 
-	<!-- jQuery 2.0.2 -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<!-- jQuery 2.0.2 --
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
+		<script src="http://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script>
     <!-- jQuery UI 1.10.3 -->
         <script src="resources/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
     <!-- Bootstrap -->
@@ -494,7 +495,9 @@
 						$("#prospectus_tabs").tabs({ collapsible: true });	
 						
 						$(".subjectClass").click(function(){ 
-							var subjId = $(this).attr('id');
+							var subject_id = $(this).attr('id');
+							var arr = subject_id.split('_');
+							var subjId = arr[1];
 							
 							$('#enrol_class_sched').load('enrolClassSched/' + subjId + ' #enrollmentClassShed', function(){						    
 								$("#enrollmentClassShed").css("display", "block");
@@ -505,33 +508,45 @@
 									var dueEnroll = Date.parse($("#class_" + classId + " #dueEnroll").text());
 									var currentDate = new Date();
 									if(currentDate > dueEnroll)
-										alert("cannot enroll due date already lapsed");
+										$("#alert_dueDateLapsed").css("display", "block");
 									else{
-										if(numEnrollee > maxEnrollee)
-											alert("Cannot Enroll already reach maximum enrollees");
-										else if(numEnrollee == maxEnrollee)
-											alert("Cannot enroll already reach maximum enrollees.");
+										if(numEnrollee >= maxEnrollee)
+											$("#alert_maxEnrollees").css("display", "block");
 										else{
 											$.ajax({
 												type: "GET",
 												url: base_url + "/classEnrollment/" + classId,
+												dataType: 'json',
 												success: function(data){
-													for(var counter in data.Records){ 
-													    $.each(data.Records[counter].SchedPlot, function(key,value){
-													        $("."+value).load("plotClass/" + data.Records[counter].classId, function(response, status, xhr){
-													        	$("#enrollmentClassShed").fadeOut();
-													        	$(".unenrollBtn").click(function(){
-													        		var classId = $(this).attr('id');
-													        		$.ajax({
-																		type: "GET",
-																		url: base_url + "/unEnrollClass/" + classId ,
-																		success: function(data){
-																			$("#" + classId).remove();
-																		}
-																	});
-													        	});
-													        });													        
-													    });
+													if(data.MaxSubjects)
+														$("#alert_maxSubjects").css("display", "block");
+													else if(data.ConflictTime){
+														$("#alert_conflictTime").css("display", "block");
+														$("#conflict_time").append(data.SubjectName);
+													}else if(data.ConflictDay){
+														$("#alert_conflictDay").css("display", "block");
+														$("#conflict_day").append(data.SubjectName);
+													}else if(data.SubjectAlreadyEnrolled){
+														$("#alert_subjectAlreadyEnrolled").css("display", "block");
+														$("#subjectAlreadyEnrolled").append(data.SubjectName);
+													}else{
+														for(var counter in data.Records){ 
+														    $.each(data.Records[counter].SchedPlot, function(key,value){
+														        $("."+value).load("plotClass/" + data.Records[counter].classId, function(response, status, xhr){
+														        	$(".unenrollBtn").click(function(){
+														        		var classId = $(this).attr('id');
+														        		$.ajax({
+																			type: "GET",
+																			url: base_url + "/unEnrollClass/" + classId ,
+																			success: function(data){
+																				$("#" + classId).remove();
+																			}
+																		});
+														        	});
+														        });													        
+														    });
+														}
+														$("#enrollmentClassShed").fadeOut();
 													}													
 												},
 												error: function(data) {

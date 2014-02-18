@@ -12,7 +12,7 @@ public interface CallInSickRepository extends JpaRepository <CallInSick, Integer
 	
 	public List<CallInSick> findByStudent_UserIdAndClazz_classId(int student_id, int classId);
 	
-	@Query("SELECT cis.clazz.classId, count(cis.clazz.classId) " +
+	@Query("SELECT cis.clazz.classId, sum(cis.numDaysAbsent) " +
 			"FROM CallInSick cis " +
 			"WHERE cis.clazz.classId = :class_id " +
 			"AND cis.student.userId = :student_id " +

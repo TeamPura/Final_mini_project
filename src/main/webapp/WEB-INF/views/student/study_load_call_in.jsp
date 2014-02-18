@@ -1,8 +1,9 @@
 <div id="callIn_container" class="white_content">
 
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-		<div class="col-md-6" style="margin: 340px;">
+		<div class="col-md-6" style="margin: 100px 320px;">
 	    	<div class="box box-solid box-info">
 	        	<div class="box-header">
 	            	<h3 class="box-title" style="font-weight: bold;">Call In Form</h3>
@@ -13,6 +14,18 @@
 	             <div class="box-body">
 	             	<div class="row">
 			        	<div class="col-xs-12">
+			        		<br/>
+			        		<div id="success_callIn" class="alert alert-success alert-dismissable" style="display: none">
+				                <i class="fa fa-check"></i>
+				                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				            	<b>Call in is recorded.</b>
+				            </div>
+				            <div id="alert_maxSickDays" class="alert alert-danger alert-dismissable" style="display: none">
+				                <i class="fa fa-warning"></i>
+				                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				            	<b>You are only limited for 5 maximum sick days.</b>
+				            </div>
+			        		
 			            	<div class="box">
 			                  	<div id="call_ins_tabs" class="nav-tabs-custom">
 									<ul class="nav nav-tabs">
@@ -28,11 +41,13 @@
 				                                <div class="box-body">
 				                                    <form method="post" id="${classId}">
 				                                    	<div class="form-group">
-				                                            <label>Call In Log Count</label>
+				                                            <label>Total Number of Sick Days</label>
+				                                            <c:if test="${empty logCount}">
+				                                            	<input name="logCount" id="0" class="form-control logCount" placeholder="0" disabled="" type="text">
+				                                            </c:if>
 				                                            <c:forEach items="${logCount}" var="logCount">
-				                                            	<c:set var="countLog" scope="session" value="${logCount[1] + 1}"/>
-				                                            	<input name="logCount" id="${countLog}" class="form-control logCount" placeholder="${countLog}" disabled="" type="text">
-				                                            </c:forEach>				                                             
+				                                            	<input name="logCount" id="${logCount[1]}" class="form-control logCount" placeholder="${logCount[1]}" disabled="" type="text">
+				        									</c:forEach>			                                             
 				                                        </div>
 				                                    	<div class="form-group">
 				                                            <label>Call In Reason</label>
@@ -48,22 +63,7 @@
 				                             </div>                              
 								      	</div>
 								      	<div class="tab-pane" id="tab_call_in_history">
-									 		<div class="box-body table-responsive no-padding">
-									 			<table class="table table-hover">
-									 				<tr>
-									 					<th>Call In Date</th>
-									 					<th>Reason</th>
-									 					<th>Days Absent</th>
-									 				</tr>
-									 				<c:forEach items="${callInLogs}" var="callInLogs">
-									 					<tr>
-									 						<td>${callInLogs.callInDate}</td>
-									 						<td>${callInLogs.reason}</td>
-									 						<td>${callInLogs.numDaysAbsent}</td>
-									 					</tr>
-									 				</c:forEach>
-									 			</table>
-									 		</div>
+									 		<!-- loads call in logs -->
 								      	</div>
 								    </div><!-- /.tab-content -->							    
 								</div><!-- /#call_ins_tabs -->		

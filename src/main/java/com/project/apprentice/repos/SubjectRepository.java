@@ -9,6 +9,6 @@ import com.project.apprentice.model.Subject;
 
 public interface SubjectRepository extends JpaRepository <Subject, Integer>  {
 	
-	public List<Subject> findByPropectus(Prospectus prospectus);
+	public List<Subject> findByProspectus(Prospectus prospectus);
 		
 }

@@ -45,7 +45,6 @@
 				                                            <th>Description</th>
 				                                            <th>Units</th>
 				                                            <th>Lec Hours</th>
-				                                            <th>Lab Hours</th>
 				                                            <th style="text-align:center">Classes</th>
 			                                        	</tr>
 			                                       		<c:forEach items="${subjects}" var="subjects">
@@ -54,10 +53,9 @@
 			                                        				<td>${subjects.subjName}</td>
 			                                        				<td>${subjects.subjDesc}</td>
 			                                        				<td>${subjects.units}</td>
-			                                        				<td>0</td>
-			                                        				<td>0</td>
+			                                        				<td>${subjects.units}</td>
 			                                        				<td style="text-align:center">
-			                                        					<button id="${subjects.subjId}" class="subjectClass btn bg-purple margin" style="margin: 0px;">
+			                                        					<button id="subject_${subjects.subjId}" class="subjectClass btn bg-purple margin" style="margin: 0px;">
 			                                        						View Class Schedules
 			                                        					</button>
 			                                        				</td>

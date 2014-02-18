@@ -444,29 +444,29 @@
 					$("#call_ins_tabs").tabs({ collapsible: true });	
 					$(".callIn").click(function(){
 						var classId = $(this).attr('id');
-						$('#call_in_container').load('callInLoadModal/' + classId + '', function(){						    
-							$("#callIn_container").css("display", "block");
+						$('#call_in_container').load('callInLoadModal/' + classId + '', function(){		
 							$(".callInSubmitBtn").click(function (){
 								var classId = $(this).attr('id');
 								var reason = $('#reason').val();
 								var numDays = $('#numDaysAbsent').val();
 								var logCount = $(".logCount").attr('id');
 								var dataString = '&reason=' + reason + '&numDays=' + numDays + '&classId=' + classId;
-								if((logCount) > 6){
-									alert("You cannot log another call in. Please see your class adviser immediately");
+								if((logCount + numDays) > 5){
+									$("#alert_maxSickDays").fadeIn('fast').delay(3000).fadeOut('slow');
 								}else{
 									$.ajax({
 										type: "POST",
 										url: base_url + "/newCallIn",
 										data: dataString,
 										success: function(){
-											alert("Call In Log Recorded");
-											$("#callIn_container").css("display", "none");
+											$("#success_callIn").fadeIn('fast').delay(3000).fadeOut('slow');
+											$("#tab_call_in_history").load('callInLogs/' + classId);
 										}
 									});
-								}
-									
+								}	
 							});
+							$("#tab_call_in_history").load('callInLogs/' + classId);
+							$("#callIn_container").css("display", "block");
 							$("#closeBtn_modal").click(function(){
 								$("#callIn_container").css("display", "none");
 							});

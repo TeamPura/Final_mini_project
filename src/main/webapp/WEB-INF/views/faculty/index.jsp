@@ -73,7 +73,7 @@
                         <li><a data-toggle="modal" data-target="#addClass">Add Class</a></li>
                         <li><a data-toggle="modal" data-target="#classEdit">Update Class</a></li>
                         <li><a data-toggle="modal" data-target="#faculty">Faculty Profile</a></li>
-                        <li><a href="/apprentice">Logout</a></li>
+                        <li><a href="facultySignout">Logout</a></li>
                     </ul>
                 </div>
             </div>

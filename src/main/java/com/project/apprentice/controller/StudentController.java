@@ -3,6 +3,7 @@ package com.project.apprentice.controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -110,7 +111,7 @@ public class StudentController {
 		ModelAndView modelAndView = new ModelAndView("student/enrollment_prospectus");	
 		int student_id = (Integer) request.getSession().getAttribute("student_id");		
 		student = studentService.getStudentInfo(student_id);
-		prospectus.setProspectusId(student.getPropectus().getProspectusId());      
+		prospectus.setProspectusId(student.getProspectus().getProspectusId());      
 		List<Subject> subjectsList = studentService.findSubjectbyProspectusId(prospectus);
 		List<YearLevel> yearLevels = studentService.findAllYearLevels();
 		List<Semester> semesters = studentService.findAllSemester();
@@ -132,53 +133,63 @@ public class StudentController {
 		
 	@RequestMapping(value="/classEnrollment/{classId}", headers = "Accept=application/json")
 	@ResponseBody
-	public String classEnrollment(HttpServletRequest request, @PathVariable int classId){
-		int student_id = (Integer) request.getSession().getAttribute("student_id");	
-		enrollInfo.setStudent_id(student_id);
-		List<Class> clazz = studentService.getClassInfo(classId);
-		enrollInfo.addClassInformation(clazz);
+	public String classEnrollment(HttpServletRequest request, @PathVariable int classId){		
+		JSONObject json = new JSONObject(); 
+		json.put("Result", "OK");
 		
-			System.out.println("SIZE: " + enrollInfo.getClazz().size());
-			for(int i=0; i<enrollInfo.getClazz().size(); i++){
-				System.out.println("Schefule: " + enrollInfo.getClazz().get(i).getSchedule().getScheduleName());
-				System.out.println("Contents: " + enrollInfo.getClazz().get(i).getClassId());
-			}
-			System.out.println("Stud ID: " + enrollInfo.getStudent_id());
-						
-			String dayName;
-			String[] dayTemp;
-			String schedFlag;
-			JSONObject json = new JSONObject();        
-	        json.put("Result", "OK");
-	        
-	       	for(int i=0; i<enrollInfo.getClazz().size(); i++){
-	        	JSONObject subjectObj = new JSONObject();
-	        	subjectObj.put("subjName", enrollInfo.getClazz().get(i).getSubject().getSubjName());
-	        	subjectObj.put("classId", enrollInfo.getClazz().get(i).getClassId());	
-	        	subjectObj.put("roomName", enrollInfo.getClazz().get(i).getRoom().getRoomName());	
-	        	subjectObj.put("start_time", enrollInfo.getClazz().get(i).getSchedule().getScheduleStartTime());
-	        	subjectObj.put("end_time", enrollInfo.getClazz().get(i).getSchedule().getScheduleEndTime());
-	        	subjectObj.put("sched_name", enrollInfo.getClazz().get(i).getSchedule().getScheduleName());
-	        	subjectObj.put("sched_day", enrollInfo.getClazz().get(i).getDay().getDayName());
-	        	JSONObject schedObj = new JSONObject();
-	        	if(enrollInfo.getClazz().get(i).getDay().getDayId() >= 7 ){
-	        		dayName = enrollInfo.getClazz().get(i).getDay().getDayName();
-		        	dayTemp = dayName.split("-");	
-		        	for(int loop=0; loop<dayTemp.length ; loop++){
-		        		schedFlag =  plotSched(dayTemp[loop], enrollInfo.getClazz().get(i).getSchedule().getScheduleName() );
-		        		schedObj.put("plotSchedDiv_" + loop, schedFlag);
+		if(enrollInfo.getClazz().size() > 5){
+	        json.put("MaxSubjects", "Reached Maximum Subjects");
+		}else{
+			int student_id = (Integer) request.getSession().getAttribute("student_id");	
+			enrollInfo.setStudent_id(student_id);
+			List<Class> clazz = studentService.getClassInfo(classId);			
+			
+			if(enrollInfo.conflictTime(clazz.get(0).getSchedule().getScheduleId())){
+				json.put("ConflictTime", "Conflict Time Schedule");
+				json.put("SubjectName", enrollInfo.getClassName(classId));
+		        System.out.println("JSON: " + json.toString(2));
+			}else if(enrollInfo.conflictDay(clazz.get(0).getDay().getDayId())){
+				json.put("ConflictDay", "Conflict Day Schedule");
+				json.put("SubjectName", enrollInfo.getClassName(classId));
+			}else if(enrollInfo.isSubjectEnrolled(clazz.get(0).getSubject().getSubjId())){
+				json.put("SubjectAlreadyEnrolled", "Subject has already been enrolled");
+				json.put("SubjectName", enrollInfo.getClassName(classId));
+			}else{	
+				enrollInfo.addClassInformation(clazz);
+				String dayName;
+				String[] dayTemp;
+				String schedFlag;
+		        
+		       	for(int i=0; i<enrollInfo.getClazz().size(); i++){
+		        	JSONObject subjectObj = new JSONObject();
+		        	subjectObj.put("subjName", enrollInfo.getClazz().get(i).getSubject().getSubjName());
+		        	subjectObj.put("classId", enrollInfo.getClazz().get(i).getClassId());	
+		        	subjectObj.put("roomName", enrollInfo.getClazz().get(i).getRoom().getRoomName());	
+		        	subjectObj.put("start_time", enrollInfo.getClazz().get(i).getSchedule().getScheduleStartTime());
+		        	subjectObj.put("end_time", enrollInfo.getClazz().get(i).getSchedule().getScheduleEndTime());
+		        	subjectObj.put("sched_name", enrollInfo.getClazz().get(i).getSchedule().getScheduleName());
+		        	subjectObj.put("sched_day", enrollInfo.getClazz().get(i).getDay().getDayName());
+		        	JSONObject schedObj = new JSONObject();
+		        	if(enrollInfo.getClazz().get(i).getDay().getDayId() >= 7 ){
+		        		dayName = enrollInfo.getClazz().get(i).getDay().getDayName();
+			        	dayTemp = dayName.split("-");	
+			        	for(int loop=0; loop<dayTemp.length ; loop++){
+			        		schedFlag =  plotSched(dayTemp[loop], enrollInfo.getClazz().get(i).getSchedule().getScheduleName() );
+			        		schedObj.put("plotSchedDiv_" + loop, schedFlag);
+			        	}
+		        	}else{
+		        		schedFlag =  plotSched(enrollInfo.getClazz().get(i).getDay().getDayName(), enrollInfo.getClazz().get(i).getSchedule().getScheduleName() );
+		        		schedObj.put("plotSchedDiv_0" , schedFlag );
 		        	}
-	        	}else{
-	        		schedFlag =  plotSched(enrollInfo.getClazz().get(i).getDay().getDayName(), enrollInfo.getClazz().get(i).getSchedule().getScheduleName() );
-	        		schedObj.put("plotSchedDiv_0" , schedFlag );
-	        	}
-	        	subjectObj.accumulate("SchedPlot", schedObj);
-	        	json.accumulate("Records", subjectObj);
-	       	}
-	        System.out.println("JSON: " + json.toString(2));
-	        
-	    String jsonString = json.toString();
-	 	return jsonString;	
+		        	subjectObj.accumulate("SchedPlot", schedObj);
+		        	json.accumulate("Records", subjectObj);
+		       	}	
+			}
+		}
+		
+		String jsonString = json.toString();
+		return jsonString;
+			
 	}
 	
 	public String plotSched(String sched_day, String sched_name){
@@ -221,7 +232,6 @@ public class StudentController {
 	@ResponseBody
 	public String saveEnrollment(@ModelAttribute StudentClass sc, HttpServletRequest request, 
 								 @ModelAttribute Student student, @ModelAttribute Class clazz) throws ParseException {
-		//ModelAndView modelAndView = new ModelAndView("student/enrollment_plot_class");
 		
 		int student_id = (Integer) request.getSession().getAttribute("student_id");		
 		student = studentService.getStudentInfo(student_id);
@@ -261,6 +271,18 @@ public class StudentController {
 		modelAndView.addObject("classId", classId);
 		modelAndView.addObject("callInLogs", callInLogs);
 		modelAndView.addObject("logCount", studentClassCallInCount);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/callInLogs/{classId}")
+	public ModelAndView callInLogs( HttpServletRequest request, @PathVariable int classId) {
+		ModelAndView modelAndView = new ModelAndView("student/study_load_call_in_logs");
+		int student_id = (Integer) request.getSession().getAttribute("student_id");	
+		List<CallInSick> callInLogs = studentService.classCallIns(student_id, classId);
+		//List<Object[]> studentClassCallInCount = studentService.getStudentClassCallInCount(student_id, classId);		
+		//modelAndView.addObject("classId", classId);
+		modelAndView.addObject("callInLogs", callInLogs);
+		//modelAndView.addObject("logCount", studentClassCallInCount);
 		return modelAndView;
 	}
 	

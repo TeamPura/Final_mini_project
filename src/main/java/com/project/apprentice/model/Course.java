@@ -31,7 +31,7 @@ public class Course implements Serializable {
 
 	//bi-directional many-to-one association to Propectus
 	@OneToMany(mappedBy="course")
-	private List<Prospectus> propectuses;
+	private List<Prospectus> prospectuses;
 
 	//bi-directional many-to-one association to Student
 	@OneToMany(mappedBy="course")
@@ -72,12 +72,12 @@ public class Course implements Serializable {
 		this.department = department;
 	}
 
-	public List<Prospectus> getPropectuses() {
-		return this.propectuses;
+	public List<Prospectus> getProspectuses() {
+		return this.prospectuses;
 	}
 
-	public void setPropectuses(List<Prospectus> propectuses) {
-		this.propectuses = propectuses;
+	public void setProspectuses(List<Prospectus> prospectuses) {
+		this.prospectuses = prospectuses;
 	}
 
 	public List<Student> getStudents() {

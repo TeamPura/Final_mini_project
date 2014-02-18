@@ -82,7 +82,7 @@ public class StudentServiceImplementation implements StudentService{
 	}
 	
 	public List<Subject> findSubjectbyProspectusId(Prospectus prospectus){				
-		List<Subject> subjects = subjectRepo.findByPropectus(prospectus);				
+		List<Subject> subjects = subjectRepo.findByProspectus(prospectus);				
 		return subjects;
 	}
 	
