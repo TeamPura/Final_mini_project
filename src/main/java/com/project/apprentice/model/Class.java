@@ -2,7 +2,6 @@ package com.project.apprentice.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
 @Entity
 public class Class implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@Column(name="class_id")
 	private int classId;

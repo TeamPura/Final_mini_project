@@ -5,16 +5,13 @@ import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.servlet.http.HttpSession;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.project.apprentice.model.Class;
 import com.project.apprentice.model.Faculty;
 import com.project.apprentice.model.Room;
@@ -33,6 +29,7 @@ import com.project.apprentice.model.StudentClass;
 import com.project.apprentice.model.Subject;
 import com.project.apprentice.service.FacultyService;
 import com.project.apprentice.model.Day;
+
 
 
 /**
