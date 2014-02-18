@@ -138,7 +138,7 @@
     <c:otherwise>  
        	<c:forEach begin="0" end="${fn:length(classList) - 1}" var="index">					
                         <tr>                		
-                        		<td> <a href="viewStudentsClassPost/${classList[index].classId}" target="_blank">  
+                        		<td><a href="#" onclick="window.open('viewStudentsClassPost/${classList[index].classId}', 'newwindow', 'width=1111, height=700'); return false;">
                         		${classList[index].subject.subjName}</a></td> 
 								<td> ${classList[index].dueEnrollmentDate}</td>								
 								<td> ${allEnrolled[index]}</td>																				
