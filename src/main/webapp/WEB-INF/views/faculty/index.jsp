@@ -22,7 +22,7 @@
     <!-- Validation Engine -->
     <link href="resources/faculty/css/validationEngine.jquery.css" rel="stylesheet">
     <script src="resources/faculty/js/jquery.validationEngine-en.js"></script>
-    <script src="resources/faculty/css/validationEngine.jquery.css"></script>  
+    <script src="resources/faculty/js/jquery.validationEngine.js"></script>  
     
     <!-- Date Picker -->
     <link href="resources/faculty/css/jquery-ui-1.10.4.custom.css" rel="stylesheet">  
@@ -33,6 +33,17 @@
 	<script type="text/javascript" charset="utf-8"  src="resources/faculty/js/DT_bootstrap.js"></script>   
 	<link href="resources/faculty/css/DT_bootstrap.css" rel="stylesheet">	 
 	<link href="resources/faculty/css/jquery.dataTables.css" rel="stylesheet">
+    
+    <script>    
+    $(document).ready(function () {
+    	jQuery(document).ready(function(){
+			// binds form submission and fields to the validation engine
+			jQuery("#formID").validationEngine();
+		});
+    });
+  	</script>
+    
+        
     
     <script>    
     $(function() {
@@ -73,7 +84,7 @@
                         <li><a data-toggle="modal" data-target="#addClass">Add Class</a></li>
                         <li><a data-toggle="modal" data-target="#classEdit">Update Class</a></li>
                         <li><a data-toggle="modal" data-target="#faculty">Faculty Profile</a></li>
-                        <li><a href="facultySignout">Logout</a></li>
+                        <li><a href="/apprentice">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -190,7 +201,7 @@
 						<td colspan="3"><div class="control-group">
  				 			<label class="control-label" for="asd">Subject</label>
  				 			<div class="controls">
-    							<select id="endTime" name="subject.subjId" class="form-control" style="width: 450px;" required>
+    							<select id="endTime" name="subject.subjId" class="form-control" style="width: 450px;"  data-validation-engine="validate[required]">
     							<option> </option>
       						<c:forEach var="listValue" items="${subjectList}">
                    				<option value="${listValue.subjId}">${listValue.subjName} - ${listValue.subjDesc} - ${listValue.units}.0 units</option>
@@ -204,7 +215,7 @@
 						<td><div class="control-group">
   						<label class="control-label" for="selectbasic">Days</label>
   							<div class="controls">
-    							<select id="selectbasic" name="day.dayId"  class="form-control" style="width: 120px;" required>
+    							<select id="selectbasic" name="day.dayId"  class="form-control" style="width: 120px;"  data-validation-engine="validate[required]">
     							<option> </option>
    							<c:forEach var="listValue" items="${dayList}">
                    				<option value="${listValue.dayId}">${listValue.dayName}</option>
@@ -220,7 +231,7 @@
 						<td><div class="control-group">
  						<label class="control-label" for="asd">Time Schedule</label>
   							<div class="controls">
-    							<select id="startTime" name="schedule.scheduleId"  class="form-control" style="width: 135px;" required>
+    							<select id="startTime" name="schedule.scheduleId"  class="form-control" style="width: 135px;"  data-validation-engine="validate[required]">
     							<option> </option>
       						<c:forEach var="listValue" items="${scheduleList}">
                    				<option value="${listValue.scheduleId}">${listValue.scheduleStartTime} - ${listValue.scheduleEndTime}</option>
@@ -234,7 +245,7 @@
 						<td><div class="control-group">
   						<label class="control-label" for="asd">Room and Capacity</label>
   							<div class="controls">
-    							<select id="endTime" name="room.roomId" class="form-control" style="width: 195px;" required>
+    							<select id="endTime" name="room.roomId" class="form-control" style="width: 195px;"  data-validation-engine="validate[required]">
     							<option> </option>
       						<c:forEach var="listValue" items="${roomList}">
                   				<option value="${listValue.roomId}">${listValue.roomName} Capacity-${listValue.roomCapacity}</option>
@@ -249,7 +260,7 @@
 						<td><div class="control-group">
   						<label class="control-label" for="asd">School Year</label>
   							<div class="controls">
-    							<select id="startTime" name="schoolYear.schoolYearId" class="form-control" style="width: 120px;" required>
+    							<select id="startTime" name="schoolYear.schoolYearId" class="form-control" style="width: 120px;"  data-validation-engine="validate[required]">
     							<option> </option>
       						<c:forEach var="listValue" items="${schoolYearList}">
                    				<option value="${listValue.schoolYearId}">${listValue.acadYear}</option>
@@ -264,7 +275,7 @@
 						<td><div class="control-group">
   						<label class="control-label" for="Startdate">Start Date:</label>
   							<div class="controls">
-   					 			<input name="startClassDate" placeholder="dd-mm-yyyy"  class="datepicker form-control" style="width: 110px;" required type="text">
+   					 			<input name="startClassDate" data-validation-engine="validate[required]" placeholder="mm-dd-yyyy"  class="datepicker form-control" style="width: 110px;" type="text">
     						</div>
 						</div>
 						</td>
@@ -273,7 +284,7 @@
 						<td><div class="control-group">
   						<label class="control-label" for="textinput">Due Date</label>
    							<div class="controls">
-    							<input name="dueEnrollmentDate" placeholder="dd-mm-yyyy" class=" datepicker form-control" style="width: 110px;"  required type="text">
+    							<input name="dueEnrollmentDate" data-validation-engine="validate[required]" placeholder="mm-dd-yyyy" class=" datepicker form-control" style="width: 110px;" type="text">
   							</div>
 						</div>
 						</td>
@@ -282,7 +293,7 @@
 						<td><div class="control-group">
   						<label class="control-label" for="minstud">Minimum Students:</label>
   							<div class="controls">
-   								<input id="minstud" name="minStudents" placeholder="" class="form-control" style="width: 50px;" required type="text">
+   								<input name="minStudents" placeholder="" class="form-control" style="width: 50px;" data-validation-engine="validate[required,custom[integer]]" type="text">
 							</div>
 						</div>
 						</td>
@@ -291,7 +302,7 @@
 						<td><div class="control-group">
   						<label class="control-label" for="textinput">Maximum Students:</label>
   							<div class="controls">
-    							<input id="textinput" name="maxStudents" placeholder="" class="form-control" style="width: 50px;" required type="text">
+    							<input name="maxStudents" placeholder="" class="form-control" style="width: 50px;" data-validation-engine="validate[required,custom[integer]] " type="text">
   							</div>
 						</div>
 						</td>
@@ -438,12 +449,11 @@
     </c:when>
     
     <c:otherwise> 
-                         <tr> 
-                           <td>Subject Name</td> 
-                <td>Enrollment Due Date</td>
-                <td>Enrolled</td>
-                    <td>Max</td> 
-                                <td></td>
+                        <tr> 
+                           		<td>Subject Name</td> 
+                				<td>Enrollment Due Date</td>
+                				<td>Enrolled</td>
+                    			<td>Max</td>                                
                                 <td>Min</td> 
                                 <td>Start Date</td> 
                                 <td>Status</td> 
