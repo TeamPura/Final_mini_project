@@ -190,21 +190,34 @@ public class FacultyController {
 			DateFormat dfto = new SimpleDateFormat("yyyy-MM-dd"); 
 			DateFormat dffrom = new SimpleDateFormat("M/dd/yyyy");
 			
-			if(dueEnrollmentDateAttr.contains(dash)){
-
+			if(dueEnrollmentDateAttr.contains(dash) && startClassDateAttr.contains(dash)){
+						
 				Date dueEnrollmentDate = dfto.parse(dueEnrollmentDateAttr);
 				Date startClassDate = dfto.parse(startClassDateAttr);
 				
-				 updateClass.setDueEnrollmentDate(dueEnrollmentDate);
-				 updateClass.setStartClassDate(startClassDate);
+				updateClass.setDueEnrollmentDate(dueEnrollmentDate);
+			    updateClass.setStartClassDate(startClassDate);
+			}
+			else if(dueEnrollmentDateAttr.contains(dash) ){
+				
+				Date startClassDate = dffrom.parse(startClassDateAttr);
+				Date dueEnrollmentDate = dfto.parse(dueEnrollmentDateAttr);
+				updateClass.setDueEnrollmentDate(dueEnrollmentDate);
+				updateClass.setStartClassDate(startClassDate);
+			}
+			else if(startClassDateAttr.contains(dash)) {
+				Date dueEnrollmentDate = dffrom.parse(dueEnrollmentDateAttr);
+				Date startClassDate = dfto.parse(startClassDateAttr);
+				updateClass.setStartClassDate(startClassDate);
+				updateClass.setDueEnrollmentDate(dueEnrollmentDate);
 			}
 			else{
 			
-			Date dueEnrollmentDate = dffrom.parse(dueEnrollmentDateAttr);
-			Date startClassDate = dffrom.parse(startClassDateAttr);
-			
-			 updateClass.setDueEnrollmentDate(dueEnrollmentDate);
-			 updateClass.setStartClassDate(startClassDate);
+				Date dueEnrollmentDate = dffrom.parse(dueEnrollmentDateAttr);
+				Date startClassDate = dffrom.parse(startClassDateAttr);
+				
+				updateClass.setDueEnrollmentDate(dueEnrollmentDate);
+				updateClass.setStartClassDate(startClassDate);
 			}
 			
 						
