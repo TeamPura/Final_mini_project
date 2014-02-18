@@ -19,6 +19,11 @@
 	<script src="resources/faculty/js/jquery-1.10.2.js"></script>  
     <script src="resources/faculty/js/bootstrap.min.js"></script>
     
+    <!-- Validation Engine -->
+    <link href="resources/faculty/css/validationEngine.jquery.css" rel="stylesheet">
+    <script src="resources/faculty/js/jquery.validationEngine-en.js"></script>
+    <script src="resources/faculty/css/validationEngine.jquery.css"></script>  
+    
     <!-- Date Picker -->
     <link href="resources/faculty/css/jquery-ui-1.10.4.custom.css" rel="stylesheet">  
     <script src="resources/faculty/js/jquery-ui-1.10.4.custom.js"></script> 
@@ -29,12 +34,9 @@
 	<link href="resources/faculty/css/DT_bootstrap.css" rel="stylesheet">	 
 	<link href="resources/faculty/css/jquery.dataTables.css" rel="stylesheet">
     
-    <script>
+    <script>    
     $(function() {
-	    $( "#datepicker" ).datepicker();
-	    $( "#datepicker1" ).datepicker();
-	    $( "#datepicker2" ).datepicker();
-	    $( "#datepicker3" ).datepicker();
+	    $( ".datepicker" ).datepicker();	    
   	});
   	</script>
 
@@ -138,7 +140,7 @@
     <c:otherwise>  
        	<c:forEach begin="0" end="${fn:length(classList) - 1}" var="index">					
                         <tr>                		
-                        		<td><a href="#" onclick="window.open('viewStudentsClassPost/${classList[index].classId}', 'newwindow', 'width=1111, height=700'); return false;">
+                        		<td><a href="#" onclick="window.open('viewStudentsClassPost/${classList[index].classId}', 'newwindow', 'width=1111, height=700, toolbar=no, menubar=no, scrollbars=no, location=no, directories=no'); return false;">
                         		${classList[index].subject.subjName}</a></td> 
 								<td> ${classList[index].dueEnrollmentDate}</td>								
 								<td> ${allEnrolled[index]}</td>																				
@@ -181,14 +183,14 @@
                 </div>
                 <div class="modal-body">
                                   
-                		<form class="form-horizontal" method="post" action="addClassPost">
+                		<form class="form-horizontal" method="post" action="addClassPost" id="formID">
 						<!-- Form Name <legend>Add Class</legend> -->
 				<table style="border-spacing: 10px;border-collapse: separate;">		
 					<tr>	<!-- Subject Drop Down -->   
 						<td colspan="3"><div class="control-group">
  				 			<label class="control-label" for="asd">Subject</label>
  				 			<div class="controls">
-    							<select id="endTime" name="subject.subjId"  class="form-control" style="width: 450px;" required>
+    							<select id="endTime" name="subject.subjId" class="form-control" style="width: 450px;" required>
     							<option> </option>
       						<c:forEach var="listValue" items="${subjectList}">
                    				<option value="${listValue.subjId}">${listValue.subjName} - ${listValue.subjDesc} - ${listValue.units}.0 units</option>
@@ -262,7 +264,7 @@
 						<td><div class="control-group">
   						<label class="control-label" for="Startdate">Start Date:</label>
   							<div class="controls">
-   					 			<input id="datepicker" name="startClassDate" placeholder="dd-mm-yyyy"  class="form-control" style="width: 110px;" required type="text">
+   					 			<input name="startClassDate" placeholder="dd-mm-yyyy"  class="datepicker form-control" style="width: 110px;" required type="text">
     						</div>
 						</div>
 						</td>
@@ -271,7 +273,7 @@
 						<td><div class="control-group">
   						<label class="control-label" for="textinput">Due Date</label>
    							<div class="controls">
-    							<input id="datepicker1" name="dueEnrollmentDate" placeholder="dd-mm-yyyy" class="form-control" style="width: 110px;"  required type="text">
+    							<input name="dueEnrollmentDate" placeholder="dd-mm-yyyy" class=" datepicker form-control" style="width: 110px;"  required type="text">
   							</div>
 						</div>
 						</td>
@@ -287,7 +289,7 @@
 
 						<!-- Maximum Students Text input-->
 						<td><div class="control-group">
-  						<label class="control-label" for="textinput">Maximun Students:</label>
+  						<label class="control-label" for="textinput">Maximum Students:</label>
   							<div class="controls">
     							<input id="textinput" name="maxStudents" placeholder="" class="form-control" style="width: 50px;" required type="text">
   							</div>
@@ -468,13 +470,13 @@
 <tr> 
                 				<td> ${classDue[index].subject.subjName}</td> 
                 				<td> 
-                  				<input required type="text" id="datepicker2" name="dueEnrollmentDate" value="${classDue[index].dueEnrollmentDate}" class="form-control" style="width: 110px;"> 
+                  				<input required type="text" name="dueEnrollmentDateAttr" value="${classDue[index].dueEnrollmentDate}" class="datepicker form-control" style="width: 110px;"> 
                   				</td> 
                 				<td> ${Enrolled[index]}</td> 
                 				<td> ${classDue[index].maxStudents}</td> 
                                 <td> ${classDue[index].minStudents}</td> 
             
-                  				<td> <input required type="text" id="datepicker3" name="startClassDate" value="${classDue[index].dueEnrollmentDate}" class="form-control" style="width: 110px;"> </td> 
+                  				<td> <input required type="text" name="startClassDateAttr" value="${classDue[index].startClassDate}" class="datepicker form-control" style="width: 110px;"> </td> 
  
                                 <td>
                                 <select id="endTime" name="status" class="input-medium" > 
@@ -507,6 +509,7 @@
     </div> 
 </div>   
 <!-- End of Edit Class -->
+
     
 
     <footer id="footer">
