@@ -37,7 +37,7 @@ public interface ClassRepository extends JpaRepository <Class, Integer>  {
 	
 	public List<Class> findByFaculty(Faculty faculty);	
 	public List<Class> findByFacultyAndSchoolYear(Faculty faculty, SchoolYear schoolYear);
-	public List<Class> findByDueEnrollmentDateOrDueEnrollmentDateBeforeAndFaculty(Date dueDate,Date dueDate2, Faculty faculty);
+	public List<Class> findByDueEnrollmentDateOrDueEnrollmentDateBeforeAndFacultyAndStatus(Date dueDate,Date dueDate2, Faculty faculty, String status);
 	
 		
 }

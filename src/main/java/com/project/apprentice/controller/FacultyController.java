@@ -107,7 +107,8 @@ public class FacultyController {
 		/* For edit class*/		
 
 		List<Integer> Enrolled = new ArrayList<Integer>();
-		List<Class> classDue = facultyService.getClassDue(date, date, homeController.faculty);
+		List<Class> classDue = new ArrayList<Class>();
+		classDue = facultyService.getClassDue(date, date, homeController.faculty,"New");
 		
 		classDuePost = classDue;
 				
@@ -177,6 +178,7 @@ public class FacultyController {
 			
 			facultyService.updateUser(updateClass, (int)updateClass.getClassId());
 							
+			
 			return "redirect:/faculty";
 		}
 

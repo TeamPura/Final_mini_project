@@ -148,9 +148,9 @@ public class FacultyImplementation implements FacultyService {
 		return (allRooms);
 	}
 	
-	public List<Class> getClassDue(Date dueDate, Date dueDate2, Faculty faculty){
+	public List<Class> getClassDue(Date dueDate, Date dueDate2, Faculty faculty, String status){
 		
-		List<Class> allClassDue =  classRepository.findByDueEnrollmentDateOrDueEnrollmentDateBeforeAndFaculty(dueDate, dueDate2, faculty);
+		List<Class> allClassDue =  classRepository.findByDueEnrollmentDateOrDueEnrollmentDateBeforeAndFacultyAndStatus(dueDate, dueDate2, faculty, status);
 		
 		return (allClassDue);
 	}
