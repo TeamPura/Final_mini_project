@@ -12,20 +12,30 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
     
-    <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-hover-dropdown.min.js"></script>
-    <title>Administrator's Page</title>
-    
-    <!-- Bootstrap core CSS -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.css" rel="stylesheet">
+<link href="resources/assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" type="text/css" />
 
-    <!-- Custom styles for this template -->
-    <link href="${pageContext.request.contextPath}/resources/assets/css/main.css" rel="stylesheet">
+   	<script src="resources/assets/js/jquery-1.11.0.min.js"></script>
+	<script src="resources/assets/js/jquery-ui-1.10.4.custom.js"></script>
+	<script src="resources/assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="resources/assets/js/bootstrap.min.js"></script>
+    <script src="resources/assets/js/hover.zoom.js"></script>
+    <script src="resources/assets/js/hover.zoom.conf.js"></script>
+
+<script src="resources/assets/js/bootstrap.js"></script>
+<script src="resources/assets/js/bootstrap-timepicker.js"></script>
+
+    <title>Administrator's Page</title>    
+    <link href="resources/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="resources/assets/css/main.css" rel="stylesheet">
+
+    <script>    
+	$(function(){
+	  	$('.datepicker_bday').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+	  	$('.timepicker-default').timepicker();
+	});
+	
+	</script>
     
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/hover.zoom.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/hover.zoom.conf.js"></script>
   </head>
   <body>
     <!-- Static navbar -->
@@ -63,7 +73,6 @@
          <li><a href="#subjects">Add Subject</a></li>    
          <li><a href="#fee">Add Fee</a></li>
          <li><a href="#rooms">Add Room</a></li>
-         <li><a href="#days">Add Day</a></li>
          <li><a href="#schedule">Add Schedule</a></li>
          <li><a href="#administrator">Add Administrator</a></li>
      </ul>
@@ -83,7 +92,7 @@
 
 <!-- Password -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="password">Password</label>  
+  <label class="col-md-4 control-label">Password</label>  
   <div class="col-md-4">
   <input id="password" name="password" class="form-control input-md" required="required" type="password">
   </div>
@@ -91,7 +100,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="lname">Last Name</label> 
+  <label class="col-md-4 control-label">Last Name</label> 
   <div class="col-md-4">
   <input id="lname" name="lname" class="form-control input-md" required="required" type="text">    
   </div>
@@ -99,7 +108,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="fname">First Name</label> 
+  <label class="col-md-4 control-label">First Name</label> 
   <div class="col-md-4">
   <input id="fname" name="fname" class="form-control input-md" required="required" type="text">
   </div>
@@ -107,7 +116,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="mname">Middle Name</label> 
+  <label class="col-md-4 control-label">Middle Name</label> 
   <div class="col-md-4">
   <input id="mname" name="mname" class="form-control input-md" required="required" type="text">
   </div>
@@ -115,16 +124,16 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="bday">Birthdate</label> 
+  <label class="col-md-4 control-label">Birthdate</label> 
   <div class="col-md-4">
-  <input id="bday" name="bday" class="form-control input-md" placeholder="yyyy-mm-dd" required="required" type="text">
-    
+  <input id="datepicker_bday" name="bday" class="datepicker_bday form-control input-md" placeholder="yyyy-mm-dd" required="required" type="text">
+
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="address">Address</label> 
+  <label class="col-md-4 control-label">Address</label> 
   <div class="col-md-4">
   <input id="address" name="address" class="form-control input-md" required="required" type="text">
     
@@ -134,26 +143,20 @@
 
 <!-- Multiple Radios -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="gender">Gender</label>
+  <label class="col-md-4 control-label">Gender</label>
   <div class="col-md-4">
   <div class="radio">
-    <label for="gender-0">
-      <input name="gender" id="gender-0" value="F" checked="checked" type="radio">
-      Female
-    </label>
+    <input name="gender" id="gender-0" value="F" checked="checked" type="radio">Female
   </div>
   <div class="radio">
-    <label for="gender-1">
-      <input name="gender" id="gender-1" value="M" type="radio">
-      Male
-    </label>
+    <input name="gender" id="gender-1" value="M" type="radio">Male
   </div>
   </div>
 </div>
 
 <!-- File Button --> 
 <div class="form-group">
-  <label class="col-md-4 control-label" for="pic_file">Upload Picture</label>
+  <label class="col-md-4 control-label">Upload Picture</label>
   <div class="col-md-4">
     <input id="pic_file" name="pic_file" class="input-file" type="file">
   </div>
@@ -161,7 +164,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="emailAddress">Email Address</label> 
+  <label class="col-md-4 control-label">Email Address</label> 
   <div class="col-md-4">
   <input id="emailAddress" name="emailAddress" class="form-control input-md" required="required" type="text">
   </div>
@@ -169,7 +172,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseId">Course Name</label>
+  <label class="col-md-4 control-label">Course Name</label>
   <div class="col-md-4">
     <select id="courseId" name="courseId" class="form-control">
       <option></option>
@@ -183,7 +186,7 @@
 <!-- Select Basic -->
 <!--
 <div class="form-group">
-  <label class="col-md-4 control-label" for="yearLevel">Year Level</label>
+  <label class="col-md-4 control-label">Year Level</label>
   <div class="col-md-4">
     <select id="yearLevel" name="yearLevelId" class="form-control">
       <option></option>
@@ -196,7 +199,7 @@
  -->
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="semesterId">Semester</label>
+  <label class="col-md-4 control-label">Semester</label>
   <div class="col-md-4">
     <select id="semesterId" name="semesterId" class="form-control">
       <option></option>
@@ -209,7 +212,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="prospectusId">Prospectus Name</label>
+  <label class="col-md-4 control-label">Prospectus Name</label>
   <div class="col-md-4">
     <select id="prospectusId" name="prospectusId" class="form-control">
       <option></option>
@@ -222,7 +225,6 @@
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
     <button id="submit" name="submit" class="btn btn-success">Save</button>
   </div>
@@ -243,7 +245,7 @@
 
 <!-- Password -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="password">Password</label>  
+  <label class="col-md-4 control-label">Password</label>  
   <div class="col-md-4">
   <input id="password" name="password" class="form-control input-md" required="required" type="password">
     
@@ -253,7 +255,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="lname">Last Name</label>  
+  <label class="col-md-4 control-label">Last Name</label>  
   <div class="col-md-4">
   <input id="lname" name="lname" class="form-control input-md" required="required" type="text">
     
@@ -262,7 +264,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="fname">First Name</label>  
+  <label class="col-md-4 control-label">First Name</label>  
   <div class="col-md-4">
   <input id="fname" name="fname" class="form-control input-md" required="required" type="text">
     
@@ -271,7 +273,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="mname">Middle Name</label>  
+  <label class="col-md-4 control-label">Middle Name</label>  
   <div class="col-md-4">
   <input id="mname" name="mname" class="form-control input-md" required="required" type="text">
     
@@ -280,16 +282,16 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="bday">Birthdate</label>  
+  <label class="col-md-4 control-label">Birthdate</label>  
   <div class="col-md-4">
-  <input id="bday" name="bday" class="form-control input-md" placeholder="yyyy-mm-dd" required="required" type="text">
+  <input id="datepicker_bday" name="bday" class="datepicker_bday form-control input-md" placeholder="yyyy-mm-dd" required="required" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="address">Address</label>  
+  <label class="col-md-4 control-label">Address</label>  
   <div class="col-md-4">
   <input id="address" name="address" class="form-control input-md" required="required" type="text">
     
@@ -298,26 +300,20 @@
 
 <!-- Multiple Radios -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="gender">Gender</label>
+  <label class="col-md-4 control-label">Gender</label>
   <div class="col-md-4">
   <div class="radio">
-    <label for="gender-0">
-      <input name="gender" id="gender-0" value="F" checked="checked" type="radio">
-      Female
-    </label>
+      <input name="gender" id="gender-0" value="F" checked="checked" type="radio">Female
     </div>
   <div class="radio">
-    <label for="gender-1">
-      <input name="gender" id="gender-1" value="M" type="radio">
-      Male
-    </label>
+      <input name="gender" id="gender-1" value="M" type="radio">Male
     </div>
   </div>
 </div>
 
 <!-- File Button --> 
 <div class="form-group">
-  <label class="col-md-4 control-label" for="pic_file">Upload Picture</label>
+  <label class="col-md-4 control-label">Upload Picture</label>
   <div class="col-md-4">
     <input id="pic_file" name="pic_file" class="input-file" type="file">
   </div>
@@ -325,7 +321,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="email_address">Email Address</label>  
+  <label class="col-md-4 control-label">Email Address</label>  
   <div class="col-md-4">
   <input id="emailAddress" name="emailAddress" class="form-control input-md" required="required" type="text">
     
@@ -334,7 +330,7 @@
 
 <!-- Select Basic (department.deptID)-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="department">Department</label>
+  <label class="col-md-4 control-label">Department</label>
   <div class="col-md-4">
     <select id="department" name="deptId" class="form-control">
       <option></option>
@@ -346,7 +342,6 @@
 </div>
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
   <input type="submit" value="Save" id="submit" name="submit" class="btn btn-success"> 
   </div>
@@ -404,7 +399,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="deptName">Department Name</label>  
+  <label class="col-md-4 control-label">Department Name</label>  
   <div class="col-md-4">
   <input id="deptName" name="deptName" class="form-control input-md" required="required" type="text">
     
@@ -413,7 +408,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="deptDesc">Description</label>  
+  <label class="col-md-4 control-label">Description</label>  
   <div class="col-md-4">
   <input id="deptDesc" name="deptDesc" class="form-control input-md" required="required" type="text">
     
@@ -422,7 +417,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="collegeId">College</label>
+  <label class="col-md-4 control-label">College</label>
   <div class="col-md-4">
     <select id="collegeId" name="collegeId" class="form-control">
       <option value="0"></option>
@@ -436,7 +431,7 @@
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
+  <label class="col-md-4 control-label"></label>
   <div class="col-md-4">
     <input type="submit" value="Save" id="submit" name="submit" class="btn btn-success">
   </div>
@@ -457,7 +452,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseName">Course Name</label>  
+  <label class="col-md-4 control-label">Course Name</label>  
   <div class="col-md-4">
   <input id="courseName" name="courseName" class="form-control input-md" required="required" type="text">
     
@@ -466,7 +461,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="courseDesc">Description</label>  
+  <label class="col-md-4 control-label">Description</label>  
   <div class="col-md-4">
   <input id="courseDesc" name="courseDesc" class="form-control input-md" required="required" type="text">
     
@@ -475,7 +470,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="deptId">Department</label>
+  <label class="col-md-4 control-label">Department</label>
   <div class="col-md-4">
     <select id="deptId" name="deptId" class="form-control">
       <option></option>
@@ -488,7 +483,6 @@
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
     <input type="submit" value="Save" id="submit" name="submit" class="btn btn-success">
   </div>
@@ -507,7 +501,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="semesterName">Semester Name</label>  
+  <label class="col-md-4 control-label">Semester Name</label>  
   <div class="col-md-4">
   <input id="semester_name" name="semester_name" class="form-control input-md" required="required" type="text">
     
@@ -516,7 +510,7 @@
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="semester_desc">Description</label>
+  <label class="col-md-4 control-label">Description</label>
   <div class="col-md-4">                     
     <textarea class="form-control" id="semester_desc" name="semester_desc"></textarea>
   </div>
@@ -524,7 +518,6 @@
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
     <button id="submit" name="submit" class="btn btn-success">Save</button>
   </div>
@@ -547,30 +540,15 @@
 <legend>Create School Year</legend>
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="acadName">Academic Year Name</label>  
+  <label class="col-md-4 control-label">Academic Year Name</label>  
   <div class="col-md-4">
   <input id="acadName" name="acadName" class="form-control input-md" required="required" type="text">
-    
-  </div>
-</div>
-<div class="form-group">
-  <label class="col-md-4 control-label" for="acadStartDate">Start Date</label>  
-  <div class="col-md-4">
-  <input id="acadStartDate" name="acadStartDate" placeholder="yyyy-mm-dd" class="form-control input-md" required="required" type="text">
-    
-  </div>
-</div>
-<div class="form-group">
-  <label class="col-md-4 control-label" for="acadEndDate">End Date</label>  
-  <div class="col-md-4">
-  <input id="acadEndDate" name="acadEndDate" placeholder="yyyy-mm-dd" class="form-control input-md" required="required" type="text">
     
   </div>
 </div>
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
     <button id="submit" name="submit" class="btn btn-success">Save</button>
   </div>
@@ -621,9 +599,48 @@
   </div>
 </div>
 
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label">Prospectus Name</label>
+  <div class="col-md-4">
+    <select id="prospectusId" name="prospectusId" class="form-control">
+      <option></option>
+      <c:forEach var="prospectusValue" items="${prospectusList}">
+      <option value="${prospectusValue.prospectusId}" name="prospectusId">${prospectusValue.prospectusDesc}</option>
+     </c:forEach>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label">Fee</label>
+  <div class="col-md-4">
+    <select id="feeeId" name="feeId" class="form-control">
+      <option></option>
+      <c:forEach var="feeValue" items="${feeList}">
+      <option value="${feeValue.feeId}" name="feeId">${feeValue.feeName} (${feeValue.feeDesc})
+      --- Lab: ${feeValue.labFee}     |    Lec: ${feeValue.lecFee}</option>
+     </c:forEach>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label">Semester</label>
+  <div class="col-md-4">
+    <select id="semesterId" name="semesterId" class="form-control">
+      <option></option>
+      <c:forEach var="semesterValue" items="${semesterList}">
+      <option value="${semesterValue.semesterId}" name="semesterId">${semesterValue.semesterDesc}</option>
+     </c:forEach>
+    </select>
+  </div>
+</div>
+
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
     <button id="submit" name="submit" class="btn btn-success">Save</button>
   </div>
@@ -640,7 +657,7 @@
 <!-- +++++ Start of Fee +++++ -->            
 <div id="page10">
   <a id="fee"></a>
-<form class="form-horizontal">
+<form class="form-horizontal" action="feecreate" method="post">
 <fieldset>
 
 <!-- Form Name -->
@@ -648,42 +665,41 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="fee_name">Fee Name</label>  
+  <label class="col-md-4 control-label">Fee Name</label>  
   <div class="col-md-4">
-  <input id="fee_name" name="fee_name" class="form-control input-md" required="required" type="text">
+  <input id="feeName" name="feeName" class="form-control input-md" required="required" type="text">
     
   </div>
 </div>
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="fee_desc">Description</label>
+  <label class="col-md-4 control-label">Description</label>
   <div class="col-md-4">                     
-    <textarea class="form-control" id="fee_desc" name="fee_desc"></textarea>
+    <textarea class="form-control" id="feeDesc" name="feeDesc" required="required"></textarea>
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="lec_fee">Lecture Fee</label>  
+  <label class="col-md-4 control-label">Laboratory Fee</label>  
   <div class="col-md-4">
-  <input id="lec_fee" name="lec_fee" class="form-control input-md" type="text">
+  <input id="labFee" name="labFee" class="form-control input-md" type="text" required="required">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="lab_fee">Laboratory Fee</label>  
+  <label class="col-md-4 control-label">Lecture Fee</label>  
   <div class="col-md-4">
-  <input id="lab_fee" name="lab_fee" class="form-control input-md" type="text">
+  <input id="lecFee" name="lecFee" class="form-control input-md" type="text" required="required">
     
   </div>
 </div>
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
     <button id="submit" name="submit" class="btn btn-success">Save</button>
   </div>
@@ -697,12 +713,11 @@
 
 
 
-
 <br><br><br><br><br>
 <!-- +++++ Start of Room +++++ -->            
 <div id="page11">
   <a id="rooms"></a>
-<form class="form-horizontal">
+<form class="form-horizontal" action="roomcreate" method="post">
 <fieldset>
 
 <!-- Form Name -->
@@ -710,43 +725,42 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="room_name">Room Name</label>  
+  <label class="col-md-4 control-label">Room Name</label>  
   <div class="col-md-4">
-  <input id="room_name" name="room_name" class="form-control input-md" required="required" type="text">
+  <input id="roomName" name="roomName" class="form-control input-md" required="required" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="room_bldg">Room building</label>  
+  <label class="col-md-4 control-label">Room building</label>  
   <div class="col-md-4">
-  <input id="room_bldg" name="room_bldg" class="form-control input-md" required="required" type="text">
+  <input id="roomBldg" name="roomBldg" class="form-control input-md" required="required" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="room_floor">Room Floor</label>  
+  <label class="col-md-4 control-label">Room Floor</label>  
   <div class="col-md-4">
-  <input id="room_floor" name="room_floor" class="form-control input-md" required="required" type="text">
+  <input id="roomFloor" name="roomFloor" class="form-control input-md" required="required" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="room_capacity">Room Capacity</label>  
+  <label class="col-md-4 control-label">Room Capacity</label>  
   <div class="col-md-4">
-  <input id="room_capacity" name="room_capacity" class="form-control input-md" required="required" type="text">
+  <input id="roomCapacity" name="roomCapacity" class="form-control input-md" required="required" type="text">
     
   </div>
 </div>
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-4">
     <button id="submit" name="submit" class="btn btn-success">Save</button>
   </div>
@@ -757,53 +771,13 @@
 
 </div>
 <!-- +++++ End of Room +++++ -->
-
 <br><br><br><br><br>
-<!-- +++++ Start of Day +++++ -->            
-<div id="page12">
-  <a id="days"></a>
-<form class="form-horizontal">
-<fieldset>
 
-<!-- Form Name -->
-<legend>Create Day</legend>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="day_name">Day Name</label>  
-  <div class="col-md-4">
-  <input id="day_name" name="day_name" class="form-control input-md" required="required" type="text">
-    
-  </div>
-</div>
-
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="day_desc">Description</label>
-  <div class="col-md-4">                     
-    <textarea class="form-control" id="day_desc" name="day_desc"></textarea>
-  </div>
-</div>
-
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
-  <div class="col-md-4">
-    <button id="submit" name="submit" class="btn btn-success">Save</button>
-  </div>
-</div>
-
-</fieldset>
-</form>
-
-</div>
-<!-- +++++ End of Day +++++ -->
-
-<br><br><br><br><br>
 <!-- +++++ Start of Schedule +++++ -->            
 <div id="page13">
   <a id="schedule"></a>
-<form class="form-horizontal">
+<form class="form-horizontal" action="schedulecreate" method="post">
 <fieldset>
 
 <!-- Form Name -->
@@ -811,34 +785,34 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="schedule_name">Schedule Name</label>  
+  <label class="col-md-4 control-label">Schedule Name</label>  
   <div class="col-md-4">
-  <input id="schedule_name" name="schedule_name" class="form-control input-md" required="required" type="text">
+  <input id="scheduleName" name="scheduleName" class="form-control input-md" required="required" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="schedule_start_time">Start TIme</label>  
+  <label class="col-md-4 control-label">Start Time</label>  
   <div class="col-md-4">
-  <input id="schedule_start_time" name="schedule_start_time" placeholder="hh:mm" class="form-control input-md" required="required" type="text">
+  <input id="scheduleStartTime" name="scheduleStartTime" placeholder="hh:mm" class="form-control input-md" required="required" type="text">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="schedule_end_time">End Time</label>  
+  <label class="col-md-4 control-label">End Time</label>  
   <div class="col-md-4">
-  <input id="schedule_end_time" name="schedule_end_time" class="form-control input-md" placeholder="hh:mm" required="required" type="text">
+  <input id="scheduleEndTime" name="scheduleEndTime" class="form-control input-md" placeholder="hh:mm" required="required" type="text">
     
   </div>
 </div>
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
+  <label class="col-md-4 control-label"></label>
   <div class="col-md-4">
     <button id="submit" name="submit" class="btn btn-success">Save</button>
   </div>
@@ -846,99 +820,89 @@
 
 </fieldset>
 </form>
-
 </div>
 <!-- +++++ End of Schedule +++++ -->
 
 <br><br><br><br><br>
-<!-- +++++ Start of Create Faculty +++++ -->             
+<!-- +++++ Start of Create Admin +++++ -->             
 <div id="page14">
   <a id="administrator"></a>
-   <form class="form-horizontal">
+   <form class="form-horizontal" action="admincreate" method="post">
 <fieldset>
 
 <!-- Form Name -->
 <legend>Create Administrator</legend>
 <div id="administrator">
 
-<!-- Text input-->
+<!-- Password input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="lname">Last Name</label>  
+  <label class="col-md-4 control-label">Password</label>
   <div class="col-md-4">
-  <input id="lname" name="lname" placeholder="" class="form-control input-md" required="required" type="text">
+    <input id="password" name="password" class="form-control input-md" required="required" type="password">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="mname">Middle Name</label>  
+  <label class="col-md-4 control-label">Last Name</label>  
   <div class="col-md-4">
-  <input id="mname" name="mname" placeholder="" class="form-control input-md" required="required" type="text">
-    
+  <input id="lname" name="lname" class="form-control input-md" required="required" type="text">
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="fname">First Name</label>  
+  <label class="col-md-4 control-label">First Name</label>  
   <div class="col-md-4">
-  <input id="fname" name="fname" placeholder="" class="form-control input-md" required="required" type="text">
-    
+  <input id="fname" name="fname" class="form-control input-md" required="required" type="text">
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="bday">Birthdate</label>  
+  <label class="col-md-4 control-label">Middle Name</label>  
   <div class="col-md-4">
-  <input id="bday" name="bday" placeholder="yyyy-mm-dd" class="form-control input-md" required="required" type="text">
-    
+  <input id="mname" name="mname" class="form-control input-md" required="required" type="text">
   </div>
 </div>
 
+
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="address">Address</label>  
+  <label class="col-md-4 control-label">Birthdate</label>  
   <div class="col-md-4">
-  <input id="address" name="address" placeholder="" class="form-control input-md" required="required" type="text">
-    
+  <input id="datepicker_bday" name="bday" placeholder="yyyy-mm-dd" class="datepicker_bday form-control input-md" required="required" type="text">
   </div>
 </div>
+
 
 <!-- Multiple Radios -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="gender">Gender</label>
+  <label class="col-md-4 control-label">Gender</label>
   <div class="col-md-4">
   <div class="radio">
-    <label for="gender-0">
-      <input name="gender" id="gender-0" value="F" checked="checked" type="radio">
-      Female
-    </label>
+    <input name="gender" id="gender" value="F" checked="checked" type="radio">Female
     </div>
   <div class="radio">
-    <label for="gender-1">
-      <input name="gender" id="gender-1" value="M" type="radio">
-      Male
-    </label>
+   <input name="gender" id="gender" value="M" type="radio">Male
     </div>
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="email_address">Email Address</label>  
+  <label class="col-md-4 control-label">Address</label>  
   <div class="col-md-4">
-  <input id="email_address" name="email_address" placeholder="" class="form-control input-md" required="required" type="text">
-    
+  <input id="address" name="address" class="form-control input-md" required="required" type="text">
   </div>
 </div>
 
-<!-- Password input-->
+<!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="passwordinput">password</label>
+  <label class="col-md-4 control-label">Email Address</label>  
   <div class="col-md-4">
-    <input id="passwordinput" name="passwordinput" placeholder="" class="form-control input-md" required="required" type="password">
+  <input id="emailAddress" name="emailAddress" class="form-control input-md" required="required" type="text">
     
   </div>
 </div>
@@ -946,17 +910,16 @@
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="submit"></label>
+  <label class="col-md-4 control-label"></label>
   <div class="col-md-4">
     <button id="submit" name="submit" class="btn btn-success">Save</button>
   </div>
 </div>
+
 </fieldset>
 </form>
 </div>
-
         </div><!-- /row -->
-        
    </div> <!-- /container -->
     
     
@@ -986,54 +949,56 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-                $(".contactLink").click(function(){
-                    if ($("#contactForm").is(":hidden")){
-                        $("#contactForm").slideDown("slow");
-                    }
-                    else{
-                        $("#contactForm").slideUp("slow");
-                    }
-                });
-            });
-            function closeForm(){
-                $("#messageSent").show("slow");
-                setTimeout('$("#messageSent").hide();$("#contactForm").slideUp("slow")', 2000);
-           }
+ 
+	<script type="text/javascript">
+	$(document).ready(function(){
+	                $(".contactLink").click(function(){
+		                    if ($("#contactForm").is(":hidden")){
+		                        $("#contactForm").slideDown("slow");
+		                    }
+		                    else{
+		                        $("#contactForm").slideUp("slow");
+		                    }
+		                });
+	});
+	            function closeForm(){
+	                $("#messageSent").show("slow");
+	                setTimeout('$("#messageSent").hide();$("#contactForm").slideUp("slow")', 2000);
+	           }
+	
+	$(document).ready(function() {
+	  function filterPath(string) {
+	    return string
+	      .replace(/^\//,'')
+	      .replace(/(index|default).[a-zA-Z]{3,4}$/,'')
+	      .replace(/\/$/,'');
+	  }
+	  $('a[href*=#]').each(function() {
+	    if ( filterPath(location.pathname) == filterPath(this.pathname)
+	    && location.hostname == this.hostname
+	    && this.hash.replace(/#/,'') ) {
+	      var $targetId = $(this.hash), $targetAnchor = $('[name=' + this.hash.slice(1) +']');
+	      var $target = $targetId.length ? $targetId : $targetAnchor.length ? $targetAnchor : false;
+	       if ($target) {
+	         var targetOffset = $target.offset().top;
+	         $(this).click(function() {
+	           $('html, body').animate({scrollTop: targetOffset}, 1000);
+	           var d = document.createElement("div");
+	        d.style.height = "101%";
+	        d.style.overflow = "hidden";
+	        document.body.appendChild(d);
+	        window.scrollTo(0,scrollToM);
+	        setTimeout(function() {
+	        d.parentNode.removeChild(d);
+	            }, 10);
+	           return false;
+	         });
+	      }
+	    }
+	  });
+	});
+		
+	</script>
 
-$(document).ready(function() {
-  function filterPath(string) {
-    return string
-      .replace(/^\//,'')
-      .replace(/(index|default).[a-zA-Z]{3,4}$/,'')
-      .replace(/\/$/,'');
-  }
-  $('a[href*=#]').each(function() {
-    if ( filterPath(location.pathname) == filterPath(this.pathname)
-    && location.hostname == this.hostname
-    && this.hash.replace(/#/,'') ) {
-      var $targetId = $(this.hash), $targetAnchor = $('[name=' + this.hash.slice(1) +']');
-      var $target = $targetId.length ? $targetId : $targetAnchor.length ? $targetAnchor : false;
-       if ($target) {
-         var targetOffset = $target.offset().top;
-         $(this).click(function() {
-           $('html, body').animate({scrollTop: targetOffset}, 1000);
-           var d = document.createElement("div");
-        d.style.height = "101%";
-        d.style.overflow = "hidden";
-        document.body.appendChild(d);
-        window.scrollTo(0,scrollToM);
-        setTimeout(function() {
-        d.parentNode.removeChild(d);
-            }, 10);
-           return false;
-         });
-      }
-    }
-  });
-});
-</script>
   </body>
 </html>

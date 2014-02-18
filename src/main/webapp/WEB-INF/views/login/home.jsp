@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
@@ -54,6 +55,11 @@
                 <button type="submit">Sign me in</button>  
                 
                 <h4> ${prompt} </h4>
+                
+                <c:if test="${not empty promt}"> 
+                	<script>alert("No user found!"); </script>                                
+                </c:if>
+               
                               
             </form>
         </div>

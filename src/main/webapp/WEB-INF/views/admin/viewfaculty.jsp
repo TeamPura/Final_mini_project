@@ -65,6 +65,16 @@ background-color:#3BFFCB; }
 text-decoration: none;border-color: #00557F; color: #FFFFFF; background: none; background-color:#006699;}
 div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }
 </style>
+<script>
+function ConfirmDelete()
+    {
+      var x = confirm("Are you sure you want to delete?");
+      if (x)
+          return true;
+      else
+        return false;
+    }
+</script>  
 </head>
 <body>
 
@@ -133,7 +143,7 @@ div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }
 <c:when test="${listValue.status>=1}">
 	<tr>
  <td>${listValue.userId}</td><td>${listValue.lname}</td> <td>${listValue.fname}</td><td><a href="viewf/${listValue.userId}">View / Edit</a></td>
- <td><form action="deletef/${listValue.userId}" method="post"><button id="submit" name="submit" class="btn btn-danger" onClick="confirm( 'Are you sure?')">Delete</button></form></td>
+ <td><form action="deletef/${listValue.userId}" method="post"><button id="submit" name="submit" class="btn btn-danger" Onclick="return ConfirmDelete();">Delete</button></form></td>
  </tr>
  </c:when>
  </c:choose>

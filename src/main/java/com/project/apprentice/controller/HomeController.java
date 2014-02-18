@@ -45,7 +45,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/loginHomePost", method = RequestMethod.POST)
-    public String userLogin(HttpServletRequest request, @ModelAttribute("loginAttribute") Admin loginAdmin, Faculty loginFaculty,Student loginStudent, Model model){           
+    public String userLogin(HttpServletRequest request, @ModelAttribute("loginAttribute") Admin loginAdmin, Faculty loginFaculty,Student loginStudent, Model model, String promt){           
 		int adminId = loginAdmin.getUserId();
 		String adminPassword = loginAdmin.getPassword();
 
@@ -70,7 +70,7 @@ public class HomeController {
 			request.getSession().setAttribute("student_id", studentId);
 			return "redirect:/studentDashboard";
 		}else{
-			String promt = "The user name / password is incorrect.";
+			promt = "test";
 			model.addAttribute("prompt", promt );
 			return "redirect:/";
 		}

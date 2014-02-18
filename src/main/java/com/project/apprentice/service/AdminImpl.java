@@ -5,21 +5,30 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+
+import com.project.apprentice.model.Admin;
 import com.project.apprentice.model.College;
 import com.project.apprentice.model.Course;
 import com.project.apprentice.model.Department;
 import com.project.apprentice.model.Faculty;
+import com.project.apprentice.model.Fee;
 import com.project.apprentice.model.Prospectus;
+import com.project.apprentice.model.Room;
+import com.project.apprentice.model.Schedule;
 import com.project.apprentice.model.SchoolYear;
 import com.project.apprentice.model.Semester;
 import com.project.apprentice.model.Student;
 import com.project.apprentice.model.Subject;
 import com.project.apprentice.model.YearLevel;
+import com.project.apprentice.repos.AdminUserRepository;
 import com.project.apprentice.repos.CollegeRepository;
 import com.project.apprentice.repos.CourseRepository;
 import com.project.apprentice.repos.DepartmentRepository;
 import com.project.apprentice.repos.FacultyUserRepository;
+import com.project.apprentice.repos.FeeRepository;
 import com.project.apprentice.repos.ProspectusRepository;
+import com.project.apprentice.repos.RoomRepository;
+import com.project.apprentice.repos.ScheduleRepository;
 import com.project.apprentice.repos.SchoolYearRepository;
 import com.project.apprentice.repos.SemesterRepository;
 import com.project.apprentice.repos.StudentUserRepository;
@@ -49,7 +58,14 @@ public class AdminImpl implements AdminService
 	private SubjectRepository subjectrepos;
 	@Resource
 	private SchoolYearRepository schoolyearrepos;
-
+	@Resource
+	private FeeRepository feerepos;
+	@Resource
+	private RoomRepository roomrepos;
+	@Resource
+	private ScheduleRepository schedulerepos;
+	@Resource
+	private AdminUserRepository adminrepos;
 	//COLLEGES
 	public List<College> DisplayAllColleges()
 	{
@@ -188,7 +204,6 @@ public class AdminImpl implements AdminService
 
 	public void EditStudent(Student student)
 	{
-		
 		studentrepos.save(student);
 	}
 	
@@ -214,6 +229,33 @@ public class AdminImpl implements AdminService
 	public void AddNewSubject(Subject subject)
 	{
 		subjectrepos.save(subject);
-		
+	}
+
+
+	public List<Fee> DisplayAllFees()
+	{
+		List <Fee> allfees = feerepos.findAll();
+		return allfees;
+	}
+
+	public void AddNewFee(Fee fee)
+	{
+		feerepos.save(fee);
+	}
+
+	public void AddNewRoom(Room room)
+	{
+		roomrepos.save(room);
+	}
+
+	public void AddNewSchedule(Schedule schedule)
+	{
+		schedulerepos.save(schedule);
+	}
+
+
+	public void AddNewAdmin(Admin admin)
+	{
+		adminrepos.save(admin);
 	}
 }

@@ -17,11 +17,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.apprentice.model.Admin;
 import com.project.apprentice.model.College;
 import com.project.apprentice.model.Course;
 import com.project.apprentice.model.Department;
 import com.project.apprentice.model.Faculty;
+import com.project.apprentice.model.Fee;
 import com.project.apprentice.model.Prospectus;
+import com.project.apprentice.model.Room;
+import com.project.apprentice.model.Schedule;
 import com.project.apprentice.model.SchoolYear;
 import com.project.apprentice.model.Semester;
 import com.project.apprentice.model.Student;
@@ -88,12 +92,14 @@ public class AdminController
 		List <Semester> semesterList = adminservice.DisplayAllSemesters();
 		List <Prospectus> prospectusList = adminservice.DisplayAllProspectus();
 		List <YearLevel> yearLevelList = adminservice.DisplayAllYearLevels();
+		List <Fee> feeList = adminservice.DisplayAllFees();
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("collList", collList);
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("semesterList", semesterList);
 		model.addAttribute("prospectusList", prospectusList);
 		model.addAttribute("yearLevelList", yearLevelList);
+		model.addAttribute("feeList", feeList);
 		return "admin/createuser";
 	}
 	
@@ -248,38 +254,86 @@ public class AdminController
 		return "redirect:/createpage";
 	}
 	
-	/*@RequestMapping(value = "/schoolyearcreate", method = RequestMethod.POST)
-	public String createschoolyear(String acadName, String acadStartDate, String acadEndDate) throws ParseException
+	@RequestMapping(value = "/schoolyearcreate", method = RequestMethod.POST)
+	public String createschoolyear(String acadName) throws ParseException
 	{
-		SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
-		Date startdate = date.parse(acadStartDate);
-		Date enddate = date.parse(acadEndDate);
-		
 		SchoolYear schoolyear = new SchoolYear();
-		schoolyear.setAcadName(acadName);
-		schoolyear.setAcadStartDate(startdate);
-		schoolyear.setAcadEndDate(enddate);
-		
+		schoolyear.setAcadYear(acadName);
+	
 		adminservice.AddNewSchoolYear(schoolyear);
 
 		return "redirect:/createpage";
 	}
-	*/
 	
 	@RequestMapping(value = "/subjectcreate", method = RequestMethod.POST)
-	public String createsubject(String subjName, String subjDesc, String units) throws ParseException 
+	public String createsubject(String subjName, String subjDesc, String units, String prospectusId, String feeId, String semesterId) throws ParseException 
 	{
-		Subject subject = new Subject ();
+		int prospectusid = Integer.parseInt(prospectusId);
+		int feeid = Integer.parseInt(feeId);
+		int semesterid = Integer.parseInt(semesterId);
 		int units1 = Integer.parseInt(units);
+		
+		Subject subject = new Subject ();
+		Prospectus prospectus = new Prospectus ();
+		Fee fee = new Fee();
+		Semester semester = new Semester();
+		
+		prospectus.setProspectusId(prospectusid);
+		fee.setFeeId(feeid);
+		semester.setSemesterId(semesterid);
+		
 		subject.setSubjName(subjName);
 		subject.setSubjDesc(subjDesc);
 		subject.setUnits(units1);
+		subject.setFee(fee);
+		subject.setSemester(semester);
+		subject.setProspectus(prospectus);
 		
 		adminservice.AddNewSubject(subject);
 		return "redirect:/createpage";
 	}
 	
+	@RequestMapping(value = "/feecreate", method = RequestMethod.POST)
+	public String createfee(Fee fee)  
+	{
+		adminservice.AddNewFee(fee);
+		return "redirect:/createpage";
+	}
 	
+	@RequestMapping(value = "/roomcreate", method = RequestMethod.POST)
+	public String createroom(Room room)  
+	{
+		adminservice.AddNewRoom(room);
+		return "redirect:/createpage";
+	}
+	
+	@RequestMapping(value = "/schedulecreate", method = RequestMethod.POST)
+	public String createschedule(Schedule schedule)  
+	{
+		adminservice.AddNewSchedule(schedule);
+		return "redirect:/createpage";
+	}
+	
+	@RequestMapping(value = "/admincreate", method = RequestMethod.POST)
+	public String createadmin(String password, String lname, String mname, String fname, String bday, String address, String gender, String emailAddress) throws ParseException  
+	{
+		Admin admin = new Admin();
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
+		Date date1 = date.parse(bday);
+		
+		admin.setPassword(password);
+		admin.setLname(lname);
+		admin.setMname(mname);
+		admin.setFname(fname);
+		admin.setAddress(address);
+		admin.setEmailAddress(emailAddress);
+		admin.setGender(gender);
+		admin.setBday(date1);
+		
+		
+		adminservice.AddNewAdmin(admin);
+		return "redirect:/createpage";
+	}
 	
 	@RequestMapping(value = "/deletef/{userId}", method = RequestMethod.POST)
 	public String deletefaculty(@ModelAttribute Faculty faculty, @PathVariable int userId)
@@ -294,7 +348,6 @@ public class AdminController
 		adminservice.DeleteStudent(userId);
 		return "redirect:/viewpage";
 	 }
-	 
 
 	 @RequestMapping(value="/viewf/{userId}", method=RequestMethod.GET)
 	 public @ResponseBody ModelAndView viewFacultyPage(Model model, @PathVariable int userId)

@@ -69,15 +69,15 @@
         <div class="row mt centered">    
             <div class="col-lg-4" style="padding-top: 40px">
                 <p>Create</p>
-                <a class="zoom green" href="/apprentice/createpage"><img img class="img-responsive" src="http://localhost:8080/apprentice/resources/assets/img/portfolio/create.jpg"></img></a>
+                <a class="zoom green" href="/apprentice/createpage"><img img class="img-responsive" src="${pageContext.request.contextPath}/resources/assets/img/portfolio/create.jpg"></img></a>
             </div>
             <div class="col-lg-4" style="padding-top: 40px">
                 <p>View Records</p>
-                <a class="zoom green" href="/apprentice/viewpage"><img img class="img-responsive" src="http://localhost:8080/apprentice/resources/assets/img/portfolio/viewlist.png"></img></a>
+                <a class="zoom green" href="/apprentice/viewpage"><img img class="img-responsive" src="${pageContext.request.contextPath}/resources/assets/img/portfolio/viewlist.png"></img></a>
             </div>
             <div class="col-lg-4" style="padding-top: 40px">
                  <p>Search</p>
-                 <a class="zoom green" href="#"><img img class="img-responsive" src="http://localhost:8080/apprentice/resources/assets/img/portfolio/search1.png"></img></a>
+                 <a class="zoom green" href="#"><img img class="img-responsive" src="${pageContext.request.contextPath}/resources/assets/img/portfolio/search1.png"></img></a>
             </div>
         </div><!-- /row -->
         

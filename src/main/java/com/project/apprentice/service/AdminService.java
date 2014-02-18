@@ -1,11 +1,16 @@
 package com.project.apprentice.service;
 
 import java.util.List;
+
+import com.project.apprentice.model.Admin;
 import com.project.apprentice.model.College;
 import com.project.apprentice.model.Course;
 import com.project.apprentice.model.Department;
 import com.project.apprentice.model.Faculty;
+import com.project.apprentice.model.Fee;
 import com.project.apprentice.model.Prospectus;
+import com.project.apprentice.model.Room;
+import com.project.apprentice.model.Schedule;
 import com.project.apprentice.model.SchoolYear;
 import com.project.apprentice.model.Semester;
 import com.project.apprentice.model.Student;
@@ -14,6 +19,8 @@ import com.project.apprentice.model.YearLevel;
 
 public interface AdminService
 {
+	public void AddNewAdmin(Admin admin);
+	
 	public List<College> DisplayAllColleges();
 	public void AddNewCollege(College college);
 	
@@ -30,11 +37,18 @@ public interface AdminService
 	public void EditFaculty(Faculty faculty);
 	public int FacultyCount ();
 	
+	public List <Fee> DisplayAllFees();
+	public void AddNewFee(Fee fee);
+	
 	public List <Prospectus> DisplayAllProspectus();
 	public void AddNewProspectus (Prospectus prospectus);
 	
+	public void AddNewRoom (Room room);
+	
 	public List <Semester> DisplayAllSemesters();
 	public void AddNewSemester(Semester semester);
+	
+	public void AddNewSchedule (Schedule schedule);
 	
 	public void AddNewSchoolYear (SchoolYear schoolyear);
 	
