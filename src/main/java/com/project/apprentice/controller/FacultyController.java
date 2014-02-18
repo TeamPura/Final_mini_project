@@ -58,9 +58,17 @@ public class FacultyController {
 	 * @throws ParseException 
 	 */
 	
+	public Faculty getFaculty(HttpServletRequest request){
+		Faculty faculty =  (Faculty) request.getSession().getAttribute("loginFaculty");	
+		return faculty;
+	}
+	
+	
 	
 	@RequestMapping(value = "/faculty", method = RequestMethod.GET)
-	public String index(Model model) throws ParseException{	
+	public String index(HttpServletRequest request, Model model) throws ParseException{	
+		
+		Faculty faculty =  (Faculty) request.getSession().getAttribute("loginFaculty");
 		
 		Date date = new Date();
 		String lasmod = new SimpleDateFormat("yyyy-MM-dd").format(date);
@@ -75,7 +83,7 @@ public class FacultyController {
 		List<Subject> subjectList = facultyService.getSubjects();
 		List<Room> roomList = facultyService.getRoom();
 	
-		List<Class> classList = facultyService.viewAll(homeController.faculty);
+		List<Class> classList = facultyService.viewAll(faculty);
 		
 		List<Integer> allEnrolled = new ArrayList<Integer>();
 		
@@ -93,7 +101,7 @@ public class FacultyController {
 		
 		/* For add class */
 		
-		model.addAttribute("faculty",homeController.faculty);
+		model.addAttribute("faculty",faculty);
 		model.addAttribute("classList", classList);
 		model.addAttribute("schoolYearList", schoolYearList);
 		model.addAttribute("dayList",dayList);
@@ -108,7 +116,7 @@ public class FacultyController {
 		/* For edit class*/		
 
 		List<Integer> Enrolled = new ArrayList<Integer>();
-		List<Class> classDue = facultyService.getClassDue(date, date, homeController.faculty,"New");
+		List<Class> classDue = facultyService.getClassDue(date, date, faculty,"New");
 		 
 		for(int i=0; i<classDue.size();i++){
 					
@@ -143,10 +151,10 @@ public class FacultyController {
 	
 	
 	@RequestMapping(value = "/addClassPost", method = RequestMethod.POST)
-	public String addClassPost(@ModelAttribute Class classs){
+	public String addClassPost(HttpServletRequest request, @ModelAttribute Class classs){
 		
-		Faculty faculty = homeController.faculty;
-		
+		Faculty faculty =  (Faculty) request.getSession().getAttribute("loginFaculty");
+				
 		classs.setFaculty(faculty);			
 		classs.setStatus("New");
 		facultyService.addNewClass(classs);
@@ -172,10 +180,7 @@ public class FacultyController {
          return modelAndView;
 
       }
-	  
-	  
-	
-	   
+	  	   
 	  
 		@RequestMapping(value = "/updateClassStudents", method = RequestMethod.POST)
 		public String viewClassStudentsPost(@ModelAttribute Class updateClass, BindingResult result, String dueEnrollmentDateAttr, String startClassDateAttr) throws ParseException{
@@ -208,6 +213,14 @@ public class FacultyController {
 							
 			
 			return "redirect:/faculty";
+		}
+		
+		
+		@RequestMapping(value="/facultySignout")
+		public String facultyLogout(HttpServletRequest request){
+			request.getSession().removeAttribute("loginFaculty");
+			request.getSession().invalidate();
+			return "redirect:/";
 		}
 
 

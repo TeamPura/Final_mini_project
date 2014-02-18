@@ -32,7 +32,7 @@ public class HomeController {
 	@Resource
 	private AdminUserRepository adminUserImplementation;
 
-	public Faculty faculty;
+	//public Faculty faculty;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -62,7 +62,8 @@ public class HomeController {
 		if(loginAdmin != null ){                        
 			return "redirect:/";
 		}else if(loginFaculty != null){
-			faculty = loginFaculty;
+			//faculty = loginFaculty;
+			request.getSession().setAttribute("loginFaculty", loginFaculty);
 			return "redirect:/faculty";
 		}
 		else if(loginStudent != null){
