@@ -23,7 +23,17 @@
           			<td>${clazz.clazz.subject.units}</td>
           			<td>${clazz.clazz.schedule.scheduleStartTime} - ${clazz.clazz.schedule.scheduleEndTime}</td>
           			<td>${clazz.clazz.room.roomName} ${clazz.clazz.room.roomFloor} ${clazz.clazz.room.roomBldg}</td>
-          			<td>${clazz.clazz.status}</td>
+          			<c:choose>
+          				<c:when test="${clazz.clazz.status == 'New'}">
+          					<td>Enrolled</td>
+          				</c:when>
+          				<c:when test="${clazz.clazz.status == 'Cancelled'}">
+          					<td>Cancelled</td>
+          				</c:when>	
+          				<c:otherwise>
+          					<td>In Progress</td>
+          				</c:otherwise>
+          			</c:choose>  
           			<td>${clazz.clazz.faculty.fname} ${clazz.clazz.faculty.lname}</td>
           			<td><button id="${clazz.clazz.classId}" class="btn bg-olive margin callIn">Call In</button></td>
           		</tr>

@@ -99,7 +99,7 @@ public class Enrollment {
 	}
 	
 	public String getClassName(int class_id){
-		String flag = "error";
+		String flag = "other";
 		for(int i=0; i<clazz.size(); i++){
 			if(clazz.get(i).getClassId() == class_id)
 				flag = clazz.get(i).getSubject().getSubjName();

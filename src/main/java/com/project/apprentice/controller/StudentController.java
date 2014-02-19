@@ -3,7 +3,6 @@ package com.project.apprentice.controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -144,15 +143,15 @@ public class StudentController {
 			enrollInfo.setStudent_id(student_id);
 			List<Class> clazz = studentService.getClassInfo(classId);			
 			
-			if(enrollInfo.conflictTime(clazz.get(0).getSchedule().getScheduleId())){
+			if(enrollInfo.isSubjectEnrolled(clazz.get(0).getSubject().getSubjId())){
+				json.put("SubjectAlreadyEnrolled", "Subject has already been enrolled");
+				json.put("SubjectName", enrollInfo.getClassName(classId));
+			}else if(enrollInfo.conflictTime(clazz.get(0).getSchedule().getScheduleId())){
 				json.put("ConflictTime", "Conflict Time Schedule");
 				json.put("SubjectName", enrollInfo.getClassName(classId));
 		        System.out.println("JSON: " + json.toString(2));
 			}else if(enrollInfo.conflictDay(clazz.get(0).getDay().getDayId())){
 				json.put("ConflictDay", "Conflict Day Schedule");
-				json.put("SubjectName", enrollInfo.getClassName(classId));
-			}else if(enrollInfo.isSubjectEnrolled(clazz.get(0).getSubject().getSubjId())){
-				json.put("SubjectAlreadyEnrolled", "Subject has already been enrolled");
 				json.put("SubjectName", enrollInfo.getClassName(classId));
 			}else{	
 				enrollInfo.addClassInformation(clazz);
@@ -265,11 +264,21 @@ public class StudentController {
 	@RequestMapping(value="/callInLoadModal/{classId}")
 	public ModelAndView callInLoadModal( HttpServletRequest request, @PathVariable int classId) {
 		ModelAndView modelAndView = new ModelAndView("student/study_load_call_in");
-		int student_id = (Integer) request.getSession().getAttribute("student_id");	
+		/*int student_id = (Integer) request.getSession().getAttribute("student_id");	
 		List<CallInSick> callInLogs = studentService.classCallIns(student_id, classId);
 		List<Object[]> studentClassCallInCount = studentService.getStudentClassCallInCount(student_id, classId);		
 		modelAndView.addObject("classId", classId);
 		modelAndView.addObject("callInLogs", callInLogs);
+		modelAndView.addObject("logCount", studentClassCallInCount);*/
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/callInForm/{classId}")
+	public ModelAndView callInForm( HttpServletRequest request, @PathVariable int classId) {
+		ModelAndView modelAndView = new ModelAndView("student/study_load_call_in_form");
+		int student_id = (Integer) request.getSession().getAttribute("student_id");	
+		List<Object[]> studentClassCallInCount = studentService.getStudentClassCallInCount(student_id, classId);		
+		modelAndView.addObject("classId", classId);
 		modelAndView.addObject("logCount", studentClassCallInCount);
 		return modelAndView;
 	}
@@ -279,10 +288,7 @@ public class StudentController {
 		ModelAndView modelAndView = new ModelAndView("student/study_load_call_in_logs");
 		int student_id = (Integer) request.getSession().getAttribute("student_id");	
 		List<CallInSick> callInLogs = studentService.classCallIns(student_id, classId);
-		//List<Object[]> studentClassCallInCount = studentService.getStudentClassCallInCount(student_id, classId);		
-		//modelAndView.addObject("classId", classId);
 		modelAndView.addObject("callInLogs", callInLogs);
-		//modelAndView.addObject("logCount", studentClassCallInCount);
 		return modelAndView;
 	}
 	

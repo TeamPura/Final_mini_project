@@ -445,25 +445,29 @@
 					$(".callIn").click(function(){
 						var classId = $(this).attr('id');
 						$('#call_in_container').load('callInLoadModal/' + classId + '', function(){		
-							$(".callInSubmitBtn").click(function (){
-								var classId = $(this).attr('id');
-								var reason = $('#reason').val();
-								var numDays = $('#numDaysAbsent').val();
-								var logCount = $(".logCount").attr('id');
-								var dataString = '&reason=' + reason + '&numDays=' + numDays + '&classId=' + classId;
-								if((logCount + numDays) > 5){
-									$("#alert_maxSickDays").fadeIn('fast').delay(3000).fadeOut('slow');
-								}else{
-									$.ajax({
-										type: "POST",
-										url: base_url + "/newCallIn",
-										data: dataString,
-										success: function(){
-											$("#success_callIn").fadeIn('fast').delay(3000).fadeOut('slow');
-											$("#tab_call_in_history").load('callInLogs/' + classId);
-										}
-									});
-								}	
+							$("#tab_call_in").load('callInForm/' + classId, function(){
+								$(".callInSubmitBtn").click(function (){
+									var classId = $(this).attr('id');
+									var reason = $('#reason').val();
+									var numDays = $('#numDaysAbsent').val();
+									var logCount = $(".logCount").attr('id');
+									var dataString = '&reason=' + reason + '&numDays=' + numDays + '&classId=' + classId;
+									if((logCount + numDays) > 5){
+										$("#alert_maxSickDays").fadeIn('fast').delay(3000).fadeOut('slow');
+									}else{
+										$.ajax({
+											type: "POST",
+											url: base_url + "/newCallIn",
+											data: dataString,
+											success: function(){
+												$("#success_callIn").fadeIn('fast').delay(3000).fadeOut('slow');
+												$("#tab_call_in").load('callInForm/' + classId);
+												$("#tab_call_in_history").load('callInLogs/' + classId);
+											}
+										});
+									}	
+								});
+								
 							});
 							$("#tab_call_in_history").load('callInLogs/' + classId);
 							$("#callIn_container").css("display", "block");

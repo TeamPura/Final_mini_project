@@ -458,9 +458,8 @@
        <div id="enrol_class_sched"></div> 
         
 
-	<!-- jQuery 2.0.2 --
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
-		<script src="http://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<!-- jQuery 2.0.2 -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> 
     <!-- jQuery UI 1.10.3 -->
         <script src="resources/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
     <!-- Bootstrap -->
@@ -483,7 +482,7 @@
 						type: "GET",
 						url: base_url + "/saveEnrollment",
 						success: function(data){
-							alert("success");	
+							//alert("success");	
 							window.location.href = base_url + "/studyLoad";
 						}
 					});
